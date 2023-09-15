@@ -33,6 +33,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {JSON.stringify(allBlogs)}
       <button onClick={updateBlogs}>update blog</button>
+      <button onClick={()=>router.push('/signin')}>go to sign in</button>
     </main>
   );
 }

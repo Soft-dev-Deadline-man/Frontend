@@ -3,7 +3,7 @@ const nextConfig = {
     experimental: {
         appDir: true,
     },images: {
-        domains: ['cdn1.iconfinder.com'],
+        domains: ['cdn1.iconfinder.com','api.slingacademy.com'],
       },
 }
 

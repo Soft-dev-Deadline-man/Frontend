@@ -9,22 +9,24 @@ interface IRatingProps {
   rating: number;
   vote: boolean;
   setVote: any;
-  size : string
+  size : string;
+  mx : string;
 }
 
 export default function Rating({ 
   rating, 
   vote = false, 
   setVote = null,
-  size = "text-xl"
+  size = "text-xl",
+  mx="mx-1"
 }: IRatingProps) {
   const [hoverRating, setHoverRating] = useState<number>(0);
 
   const getColor = (index : number) => {
     if (hoverRating >= index) {
-      return "#000000"
+      return "#FF6F6B"
     } else if (!hoverRating && rating >= index) {
-      return "#000000"
+      return "#FF6F6B"
     }
     return "#DCDCDC"
   };
@@ -48,7 +50,7 @@ export default function Rating({
       .map((idx) => (
         <FontAwesomeIcon
           key={idx}
-          className={`${vote == true ? "cursor-pointer" : ""} ${size}`}
+          className={`${vote == true ? "cursor-pointer" : ""} ${size} ${mx}`}
           icon={faStar}
           onClick={() => handleVote(idx)}
           style={{ color: getColor(idx) }}

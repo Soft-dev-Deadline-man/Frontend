@@ -4,7 +4,7 @@ export interface IBlog {
     entrancePrice : object;
     address : string;
     rating: string;
-    separateRating : object;
+    separateRating : any;
     reviews : Array<object>; //change to IComment after
     latitude : string;
     longtitude : string;

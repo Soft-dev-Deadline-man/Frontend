@@ -15,6 +15,7 @@ const config: Config = {
       },fontFamily: {
         preahvihear: ['var(--font-preahvihear)'],
         karla: ['var(--font-roboto-karla)'],
+        karnit: ['var(--font-karnit)']
       },
     },
   },

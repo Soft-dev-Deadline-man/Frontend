@@ -24,7 +24,7 @@ import {
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faMessage } from "@fortawesome/free-regular-svg-icons";
 import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
-import CommentBox from "../../components/CommentBox"
+import CommentBox from "../../components/CommentBox";
 import { ICommentInfo } from "@/types/Comment";
 
 const blogTemp: IBlog = {
@@ -70,8 +70,8 @@ const blogTemp: IBlog = {
 
 const commentTemp: Array<ICommentInfo> = [
   {
-    blogId : "001",
-    author:{
+    blogId: "001",
+    author: {
       name: "Taylor swift",
       img: "https://api.slingacademy.com/public/sample-photos/42.jpeg",
     },
@@ -80,24 +80,34 @@ const commentTemp: Array<ICommentInfo> = [
     description: `บางแสน new normal เสียงตามสายเขาว่างี้ วันนี้เปิดให้บริการเต็มตัว มีจุดคัดกรอง แต่ไม่มีคนมาคัด เตียงผ้าใบ และร้านอาหาร กลับมาเปิดทำการ ไม่มี social distancing นั่งกันตามอัธยาศัย
     เขารณรงค์ไม่ให้ใช้ภาชนะที่ทำจากโฟม ร้านค้าเปลี่ยนมาใช้จาน ชามจริงๆ แก้ว single use เปลี่ยนจากพลาสติกเป็นแก้วกระดาษ แต่ยังไม่ 100%
     เยื้องย่างเข้าไปที่หาดปั๊ป พ่อค้าขายของทันที นั่งเก้าอี้หาด เสียไป 150 บาท สั่งอาหาร น้ำ ต้องไปสั่งที่ร้านเอง เขาลิมิตไม่ให้คนขายเข้ามา คงช่วยลดความแออัด banana boat โดนัท กลับมาเปิดทำการ ที่กลับมาด้วยคือร่องรอยขยะเกยตื้นริมหาด `,
-    recommendActivity :"รับประทานอาหารทะเล , ขับมอเตอร์ไซค์",
-    spendTime : "ตลอดทั้งวัน",
-    images: ["https://api.slingacademy.com/public/sample-photos/12.jpeg", "https://api.slingacademy.com/public/sample-photos/13.jpeg", "https://api.slingacademy.com/public/sample-photos/14.jpeg","https://api.slingacademy.com/public/sample-photos/15.jpeg","https://api.slingacademy.com/public/sample-photos/16.jpeg"],
-    score : 2
+    recommendActivity: "รับประทานอาหารทะเล , ขับมอเตอร์ไซค์",
+    spendTime: "ตลอดทั้งวัน",
+    images: [
+      "https://api.slingacademy.com/public/sample-photos/12.jpeg",
+      "https://api.slingacademy.com/public/sample-photos/13.jpeg",
+      "https://api.slingacademy.com/public/sample-photos/14.jpeg",
+      "https://api.slingacademy.com/public/sample-photos/15.jpeg",
+      "https://api.slingacademy.com/public/sample-photos/16.jpeg",
+    ],
+    score: 2,
   },
   {
-    blogId : "002",
-    author:{
+    blogId: "002",
+    author: {
       name: "Olivia rodrigo",
       img: "https://api.slingacademy.com/public/sample-photos/23.jpeg",
     },
     rating: 5,
     title: "Sunsets are my favorite color",
     description: `หาดบางแสน ชื่อสถานที่นี้ได้มาจากนิทานพื้นบ้านความรักของชายหนุ่มที่ชื่อ "แสน" กับหญิงสาวที่ชื่อ "สามมุข" ที่ไม่สมหวังในความรัก จึงพากันกระโดดน้ำตายและกลายเป็นชื่อสถานที่ต่าง ๆ ในตัวจังหวัดชลบุรี รวมถึงศาลเจ้าแม่สามมุข ที่อยู่ใกล้เคียงกันนั่นเองน้ำทะเลที่หาดบางแสนในช่วงระหว่างเดือนตุลาคมถึงเดือนกุมภาพันธ์ของปีถัดไป เป็นเวลาประมาณ 5 เดือน จะมีความใสเหมือนกับน้ำทะเลที่หาดทรายในต่างประเทศ เช่น มัลดีฟส์ โดยเป็นปรากฏการณ์ที่เกิดขึ้นเป็นประจำทุกปี`,
-    recommendActivity :"รับประทานอาหารทะเล , ขับมอเตอร์ไซค์",
-    spendTime : "ตลอดทั้งวัน",
-    images: ["https://api.slingacademy.com/public/sample-photos/31.jpeg", "https://api.slingacademy.com/public/sample-photos/32.jpeg", "https://api.slingacademy.com/public/sample-photos/33.jpeg"],
-    score : 5
+    recommendActivity: "รับประทานอาหารทะเล , ขับมอเตอร์ไซค์",
+    spendTime: "ตลอดทั้งวัน",
+    images: [
+      "https://api.slingacademy.com/public/sample-photos/31.jpeg",
+      "https://api.slingacademy.com/public/sample-photos/32.jpeg",
+      "https://api.slingacademy.com/public/sample-photos/33.jpeg",
+    ],
+    score: 5,
   },
 ];
 
@@ -172,7 +182,10 @@ export default function Login() {
 
   return imgArray.length ? (
     <div className="w-full min-h-screen flex flex-col items-center font-karnit">
-      <div className="pt-16 w-full grid grid-rows-6 lg:grid-cols-8 grid-cols-6 gap-1 h-[450px] max-w-screen-xl cursor-pointer px-4" onClick={()=>handleShowImage()}>
+      <div
+        className="pt-16 w-full grid grid-rows-6 lg:grid-cols-8 grid-cols-6 gap-1 h-[450px] max-w-screen-xl cursor-pointer px-4"
+        onClick={() => handleShowImage()}
+      >
         <div className="lg:row-span-6 lg:col-span-4  md:row-span-3  row-span-4 col-span-3 relative">
           <Image alt="img1" src={imgArray[0]} fill sizes="100vw"></Image>
         </div>
@@ -487,13 +500,15 @@ export default function Login() {
         {/* comment */}
       </div>
       <div className="w-full max-w-screen-xl px-4">
-      {commentTemp.map((val,key)=>{
-          return(
-            <CommentBox commentInfo={val} key={key}/>
-          )
+        {commentTemp.map((val, key) => {
+          return <CommentBox commentInfo={val} key={key} />;
         })}
       </div>
-      {showImage ? <AllImageModal photos={imgArray} setShow={setShowImage} /> : ""}
+      {showImage ? (
+        <AllImageModal photos={imgArray} setShow={setShowImage} />
+      ) : (
+        ""
+      )}
     </div>
   ) : (
     <div>null</div>

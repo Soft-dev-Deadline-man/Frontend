@@ -6,6 +6,7 @@ import type { Metadata } from 'next'
 import { Preahvihear,Karla,Kanit } from 'next/font/google'
 import ReduxProvider from "../providers/redux-provider"
 import AuthProvider from '../providers/nextauth-provider'
+import Navbar from '../components/Navbar'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -43,6 +44,7 @@ export default function RootLayout({
       <body>
       <ReduxProvider>
         <AuthProvider>
+          <Navbar/>
           {children}
         </AuthProvider>
       </ReduxProvider>

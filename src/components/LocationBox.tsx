@@ -10,9 +10,8 @@ import Image from "next/image";
 export default function LocationBox({ blogInfo }: { blogInfo: IBlog | null }) {
   const { data: session, status } = useSession();
   const { push } = useRouter();
-  const [checkBookmark, setCheckBookMark] = useState(false);
 
-  return blogInfo != null ? (
+  return blogInfo != null && blogInfo.image.length ? (
     <div className="flex bg-[#F8F8F8] rounded-xl overflow-hidden w-full h-[32] relative font-karnit">
       <div className="md:w-[30%] sm:w-[40%] w-[50%] sm:h-64 h-60 relative">
         <Image src={blogInfo.image[0]} fill sizes="100vw" alt=""></Image>

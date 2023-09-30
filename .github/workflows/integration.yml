@@ -28,5 +28,5 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Build NestJS application
+      - name: Build NextJS application
         run: yarn build

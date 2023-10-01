@@ -9,10 +9,10 @@ import { useRouter } from "next/navigation";
 
 const signupSchema = Yup.object().shape({
     name: Yup.string()
-        .required("This field is required."),
+        .required("กรุณาใส่ช่องนี้"),
     email: Yup.string()
         .email("Invalid email")
-        .required("This field is required."),
+        .required("กรุณาใส่ช่องนี้"),
     password: Yup.string()
         .min(6, 'รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร')
         .required('กรุณากรอกรหัสผ่าน'),
@@ -38,13 +38,13 @@ export default function Register() {
   }
 
   return (
-    <div className="flex w-full min-h-screen bg-[url('https://cdn.pic.in.th/file/picinth/image-77.png')] bg-cover bg-center bg-no-repeat">
-      <div className="static ml-auto flex items-center">
-        <img src="https://cdn.pic.in.th/file/picinth/Group-2608839.png" alt="logo" className = "ml-20 items-left" />
+    <div className="flex justify-center w-full min-h-[700px] h-screen bg-[url('https://cdn.pic.in.th/file/picinth/image-77.png')] bg-cover bg-center bg-no-repeat font-karnit flex-wrap">
+      <div className="flex lg:items-center items-end justify-center w-fit lg:w-[30%] max-w-screen-md">
+        <img src="https://cdn.pic.in.th/file/picinth/Group-2608839.png" alt="logo" className = "w-[70%]" />
       </div>
-      <div className="w-full flex justify-end items-center">
-        <section className="me-20 bg-white  w-1/2 h-5/6 flex rounded-[32px] flex-col px-16">
-          <div className="mt-14">
+      <div className="lg:w-[70%] w-full max-w-screen-xl flex justify-center lg:justify-end lg:pr-12 mt-5 sm:mt-0 sm:items-center min-h-fit">
+        <section className="bg-white sm:w-[80%] w-[90%] h-fit lg:h-5/6 flex rounded-[32px] flex-col p-4 sm:p-8 lg:px-16 lg:py-0">
+          <div className="lg:mt-14">
             <h1 className=" text-gray-800 text-4xl font-bold">Sign up</h1>
             <p className="mt-3 text-gray-400">
               Sign up new account

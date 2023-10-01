@@ -75,7 +75,7 @@ export default function Register() {
                     type="string"
                     className="w-full py-4 px-6 border rounded-xl"//focus:outline-none
                     id="name"
-                    placeholder="Lnwza007"
+                    placeholder="Name"
                   />
                   <ErrorMessage
                     component="div"
@@ -95,7 +95,7 @@ export default function Register() {
                     type="email"
                     className="w-full py-4 px-6 border rounded-xl"//focus:outline-none
                     id="email"
-                    placeholder="hello_world@gmail.com"
+                    placeholder="Email"
                   />
                   <ErrorMessage
                     component="div"

@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { useRouter } from "next/navigation";
+import { useRouter,usePathname } from "next/navigation";
 import { IBlog } from "../types/Blog";
 import Image from "next/image";
 import logo from "../app/assets/logo.png";
@@ -12,6 +12,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   const { data: user, status } = useSession();
+  const pathname = usePathname()
   const [isProfileToggle, setIsProfileToggle] = useState(false);
   const [isBarsToggle, setIsBarsToggle] = useState(false);
   console.log(user);
@@ -36,7 +37,7 @@ export default function Navbar() {
   ];
   return (
     <>
-      <div className="h-20 w-full fixed z-50 top-0 left-0 flex items-center justify-between py-4 lg:px-16 px-8 font-karnit bg-white border-b-2">
+      <div className={`${pathname === "/signin" || pathname === "/register" ? "hidden" : ""} fixed h-20 w-full z-50 top-0 left-0 flex items-center justify-between py-4 lg:px-16 px-8 font-karnit bg-white border-b-2`}>
         <div>
           <Link href="/">
             <Image
@@ -93,7 +94,7 @@ export default function Navbar() {
               </div>
               <div
                 className={`absolute  right-16  z-0 bg-gray-200 px-8 py-4 rounded ${
-                  isProfileToggle ? "top-[-400px]" : "top-20"
+                  isProfileToggle ? "top-20" : "top-[-400px]"
                 }`}
               >
                 <ul className="space-y-3">
@@ -116,7 +117,7 @@ export default function Navbar() {
         </div>
       </div>
       <div
-        className={`fixed bg-[#276968] w-full lg:hidden rounded-b-xl h-fit z-[40] duration-500 transition-all font-karnit  ${
+        className={`fixed bg-[#276968] w-full lg:hidden rounded-b-xl h-fit z-40 duration-500 transition-all font-karnit  ${
           isBarsToggle ? "top-20" : "top-[-400px]"
         }`}
       >
@@ -124,25 +125,25 @@ export default function Navbar() {
           {navMenu.map((val, index) => {
             return (
               <div className="text-white text-lg my-3" key={index}>
-                <Link href={val.linkTo}>{val.title}</Link>
+                <Link href={val.linkTo} onClick={()=>setIsBarsToggle(false)}>{val.title}</Link>
               </div>
             );
           })}
           {status != null && status === "authenticated" && user != null ? (
             <>
               <div className="text-white text-lg my-3">
-                <Link href="/bookmark">Bookmark</Link>
+                <Link href="/bookmark" onClick={()=>setIsBarsToggle(false)}>Bookmark</Link>
               </div>
               <div className="text-white text-lg my-3">
-                <Link href="/profile">บัญชีของฉัน</Link>
+                <Link href="/profile" onClick={()=>setIsBarsToggle(false)}>บัญชีของฉัน</Link>
               </div>
               <div className="text-white text-lg my-3">
-                <Link href="/">ออกจากระบบ</Link>
+                <Link href="/" onClick={()=>setIsBarsToggle(false)}>ออกจากระบบ</Link>
               </div>
             </>
           ) : (
             <div className="text-white text-lg my-3">
-                <Link href="/">Signin</Link>
+                <Link href="/" onClick={()=>setIsBarsToggle(false)}>Signin</Link>
             </div>
           )}
         </div>

@@ -21,7 +21,7 @@ export default function LocationBox({ blogInfo }: { blogInfo: IBlog | null }) {
   return blogInfo != null ? (
     <div className="flex bg-[#F8F8F8] rounded-xl overflow-hidden w-full h-[32] relative font-karnit">
       <div className="md:w-[30%] sm:w-[40%] w-[50%] sm:h-64 h-60 relative">
-        <Image src={blogInfo.image?.[0]} fill sizes="100vw" alt=""></Image>
+        <Image src={firstImage} fill sizes="100vw" alt=""></Image>
       </div>
       <div className="w-[70%] p-5">
         <h1 className="sm:text-2xl text-xl">{blogInfo.title}</h1>

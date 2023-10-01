@@ -37,10 +37,10 @@ export default function CommentBox({
       const temp = commentInfo.images.slice(0, 4);
       return temp.map((img, key) => {
         return (
-          <div className="col-span-1 relative" key={key}>
+          <div className="col-span-1 relative min-w-[16rem]" key={key}>
             {key == 3 ? (
               <div
-                className="absolute z-50 bg-black/[0.25] w-full h-full flex justify-center items-center text-white"
+                className="absolute z-30 bg-black/[0.25] w-full h-full flex justify-center items-center text-white"
                 onClick={() => handleShowImage()}
               >
                 {commentInfo.images.length - 4}+
@@ -55,7 +55,7 @@ export default function CommentBox({
     } else {
       return commentInfo.images.map((img, key) => {
         return (
-          <div className="col-span-1 relative" key={key}>
+          <div className="col-span-1 relative min-w-[16rem]" key={key}>
             <Image alt="" src={img} fill sizes="100vw"></Image>
           </div>
         );
@@ -97,7 +97,7 @@ export default function CommentBox({
       <div className="my-2">
         <h5>ระยะเวลาที่ใช้กับสถาานที่นี้ : {commentInfo.spendTime}</h5>
       </div>
-      <div className="w-full h-48 grid grid-cols-4 gap-1">{showImg}</div>
+      <div className="w-full h-48 grid grid-cols-4 gap-1 min-w-min overflow-x-scroll">{showImg}</div>
     </div>
     {showImage ? <AllImageModal photos={commentInfo.images} setShow={setShowImage}/> : ""}
   </>

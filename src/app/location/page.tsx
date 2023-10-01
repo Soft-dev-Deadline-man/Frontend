@@ -182,10 +182,7 @@ export default function Login() {
 
   return imgArray.length ? (
     <div className="w-full min-h-screen flex flex-col items-center font-karnit">
-      <div
-        className="pt-16 w-full grid grid-rows-6 lg:grid-cols-8 grid-cols-6 gap-1 h-[450px] max-w-screen-xl cursor-pointer px-4"
-        onClick={() => handleShowImage()}
-      >
+      <div className="pt-16 w-full grid grid-rows-6 lg:grid-cols-8 grid-cols-6 gap-1 h-[450px] max-w-screen-xl cursor-pointer px-4" onClick={()=>handleShowImage()}>
         <div className="lg:row-span-6 lg:col-span-4  md:row-span-3  row-span-4 col-span-3 relative">
           <Image alt="img1" src={imgArray[0]} fill sizes="100vw"></Image>
         </div>
@@ -199,13 +196,13 @@ export default function Login() {
           <Image alt="img4" src={imgArray[3]} fill sizes="100vw"></Image>
         </div>
         <div className="lg:row-span-3 lg:col-span-1  md:row-span-3  row-span-2 col-span-2 relative">
-          <div className="lg:hidden absolute z-50 bg-black/[0.25] w-full h-full flex justify-center items-center text-white">
+          <div className="lg:hidden absolute z-30 bg-black/[0.25] w-full h-full flex justify-center items-center text-white">
             {imgArray.length - 5}+
           </div>
           <Image alt="img4" src={imgArray[4]} fill sizes="100vw"></Image>
         </div>
         <div className="lg:row-span-3 lg:col-span-1 hidden lg:block relative">
-          <div className="absolute z-50 bg-black/[0.25] w-full h-full flex justify-center items-center text-white">
+          <div className="absolute z-30 bg-black/[0.25] w-full h-full flex justify-center items-center text-white">
             {imgArray.length - 6}+
           </div>
           <Image alt="img4" src={imgArray[5]} fill sizes="100vw"></Image>

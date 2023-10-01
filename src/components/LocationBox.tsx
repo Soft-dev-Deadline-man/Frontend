@@ -8,7 +8,7 @@ import { IBlog } from "../types/Blog";
 import Image from "next/image";
 
 export default function LocationBox({ blogInfo }: { blogInfo: IBlog | null }) {
-  const [firstImage,setFirstImage] =useState<string>('')
+  const [firstImage,setFirstImage] =useState<any>(null)
   const { data: session, status } = useSession();
   const { push } = useRouter();
 

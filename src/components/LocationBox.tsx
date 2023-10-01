@@ -14,7 +14,7 @@ export default function LocationBox({ blogInfo }: { blogInfo: IBlog | null }) {
 
   useEffect(()=>{
     if(blogInfo!=null){
-      setFirstImage(blogInfo.image[0]);
+      setFirstImage(blogInfo?.image?.[0]);
     }
   },[blogInfo])
 

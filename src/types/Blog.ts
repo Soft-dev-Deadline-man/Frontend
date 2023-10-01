@@ -1,9 +1,14 @@
 export interface IBlog {
-    title: string;
-    description: string;
-    authorID: string;
-    rating: number;
-    image: string[];
-    //wait for more information
-  }
-  
+  title: string;
+  catagory: string;
+  entrancePrice: object;
+  address: string;
+  rating: string;
+  separateRating: any;
+  reviews: Array<object>; //change to IComment after
+  latitude: string;
+  longtitude: string;
+  forbidden: object;
+  contact: object;
+  image?: string[];
+}

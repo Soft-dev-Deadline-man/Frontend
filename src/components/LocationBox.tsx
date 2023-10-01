@@ -8,8 +8,15 @@ import { IBlog } from "../types/Blog";
 import Image from "next/image";
 
 export default function LocationBox({ blogInfo }: { blogInfo: IBlog | null }) {
+  const [firstImage,setFirstImage] =useState<string>('')
   const { data: session, status } = useSession();
   const { push } = useRouter();
+
+  useEffect(()=>{
+    if(blogInfo!=null){
+      setFirstImage(blogInfo.image[0]);
+    }
+  },[blogInfo])
 
   return blogInfo != null ? (
     <div className="flex bg-[#F8F8F8] rounded-xl overflow-hidden w-full h-[32] relative font-karnit">

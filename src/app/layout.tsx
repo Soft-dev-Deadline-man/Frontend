@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${preahvihear.variable} ${karla.variable} ${karnit.variable}`}>
+    <html lang="en" className={`${preahvihear.variable} ${karla.variable} ${karla.variable}`}>
       <body>
         <ReduxProvider>
           <AuthProvider>{children}</AuthProvider>

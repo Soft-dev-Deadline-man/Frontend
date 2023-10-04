@@ -12,6 +12,7 @@ import { faB, faSquare, faStar } from "@fortawesome/free-solid-svg-icons";
 import Carousel from "@/components/Carousel";
 import CarouselTest from "@/components/CarouselTest";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -182,7 +183,7 @@ export default function Home() {
         <div>
           <img src="./Header.png" />
           <div className="flex flex-row justify-between">
-            <div>Y</div>
+            <div></div>
             <div>X</div>
             <div>F</div>
             <div>I</div>

@@ -99,12 +99,12 @@ export default function Navbar() {
               >
                 <ul className="space-y-3">
                   <li className="cursor-pointer">บัญชีของฉัน</li>
-                  <li className="cursor-pointer">ออกจากระบบ</li>
+                  <li className="cursor-pointer" onClick={() => signOut()}>ออกจากระบบ</li>
                 </ul>
               </div>
             </div>
           ) : (
-            <div>
+            <div onClick={() => signIn()}>
               <h1>Signin</h1>
             </div>
           )}

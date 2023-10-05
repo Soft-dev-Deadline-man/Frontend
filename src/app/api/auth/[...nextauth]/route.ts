@@ -2,6 +2,13 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import type { NextAuthOptions } from "next-auth";
 import nextAuth, { User, Account } from "next-auth";
+import { getSession, signIn } from "next-auth/react";
+import { setCookie } from 'cookies-next';
+import axios from "axios";
+
+interface token {
+  accessToken: string;
+}
 
 const authOptions: NextAuthOptions = {
   providers: [
@@ -16,7 +23,7 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         console.log(credentials);
-        const res = await fetch("/your/endpoint", {
+        const res = await fetch(`${process.env.BACKEND_ENDPOINT_DEV}/auth/login-email`, {
           method: "POST",
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" },
@@ -33,14 +40,23 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account }: any) {
+    async jwt({ token, account }) {
       if (account?.provider === "google") {
-        const { name, email } = user;
-        console.log(user);
-        console.log(account);
+        const res = await axios
+          .post(`${process.env.BACKEND_ENDPOINT_DEV}/auth/login-google`, {
+            credential: account.id_token,
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        token.accessToken = res?.data.accessToken
       }
-      return user;
+      return token
     },
+    async session({ session, token}) {
+      session.accessToken = token.accessToken as string
+      return session
+    }
   },
   pages: {
     signIn: "/signin",

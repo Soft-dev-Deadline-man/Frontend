@@ -6,6 +6,7 @@ import { signIn, signOut,getSession } from "next-auth/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const signupSchema = Yup.object().shape({
     name: Yup.string()
@@ -28,13 +29,12 @@ export default function Register() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const status = await signIn("credentials", {
-        redirect: false,
-        name: data.get("name"),
-        email: data.get("email"),
-        password: data.get("password"),
-        callbackUrl: "/",
-      });
+    const res = await axios.post(`http://10.3.22.3:5000/auth/regist-email`,{
+      email : data.get("email"),
+      password : data.get("password"),
+      name : data.get("name"),
+    })
+    console.log(res)
   }
 
   return (

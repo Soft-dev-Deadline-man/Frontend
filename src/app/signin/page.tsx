@@ -1,8 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
-import { signIn, signOut, getSession } from "next-auth/react";
+import { signIn} from "next-auth/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
@@ -20,15 +19,20 @@ export default function Login() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const status = await signIn("credentials", {
+    await signIn("credentials", {
       redirect: false,
       email: data.get("email"),
       password: data.get("password"),
-      callbackUrl: "/",
-    });
+    }).then((res)=>{
+      console.log(res)
+      if(res?.error){
+        alert("Worng Password")
+      }else{
+        router.push("/")
+      }
+    })
   }
 
-  // Google Handler function
   async function handleGoogleSignin() {
     signIn("google", { callbackUrl: "http://localhost:3000/" });
   }
@@ -71,7 +75,7 @@ export default function Login() {
                   <Field
                     name="email"
                     type="email"
-                    className="w-full mb-2 py-4 px-6 border rounded-xl" //focus:outline-none
+                    className="w-full mb-2 py-4 px-6 border rounded-xl"
                     id="email"
                     placeholder="Email"
                   />
@@ -89,7 +93,7 @@ export default function Login() {
                   <Field
                     name="password"
                     type="password"
-                    className="w-full py-4 px-6 border rounded-xl focus:outline-none" //
+                    className="w-full py-4 px-6 border rounded-xl focus:outline-none" 
                     id="password"
                     placeholder="Password"
                   />

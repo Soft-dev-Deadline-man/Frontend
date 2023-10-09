@@ -1,5 +1,6 @@
 import { configureStore,combineReducers,getDefaultMiddleware } from "@reduxjs/toolkit"
 import blogReducer from "./slice/blogSlice"
+import userReducer from "./slice/userSlice"
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "./storage";
 
@@ -9,7 +10,8 @@ const persistConfig = {
   }
 
   const rootReducer = combineReducers({ 
-    blog : blogReducer
+    blog : blogReducer,
+    user : userReducer
   })
 
   const persistedReducer = persistReducer(persistConfig, rootReducer)

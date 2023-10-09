@@ -1,14 +1,8 @@
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import type { NextAuthOptions } from "next-auth";
-import nextAuth, { User, Account } from "next-auth";
-import { getSession, signIn } from "next-auth/react";
-import { setCookie } from 'cookies-next';
+import nextAuth from "next-auth";
 import axios from "axios";
-
-interface token {
-  accessToken: string;
-}
 
 const authOptions: NextAuthOptions = {
   providers: [
@@ -21,35 +15,36 @@ const authOptions: NextAuthOptions = {
         username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
-        console.log(credentials);
-        const res = await fetch(`${process.env.BACKEND_ENDPOINT_DEV}/auth/login-email`, {
+      async authorize(credentials) {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/auth/login-email`, {
           method: "POST",
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" },
         });
+
         const user = await res.json();
 
-        // If no error and we have user data, return it
-        if (res.ok && user) {
-          return user;
+        if (user.error) {
+          throw new Error( JSON.stringify({ errors: user.error, status: false  }))
         }
-        // Return null if user data could not be retrieved
-        return null;
+
+        return user;
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, account }) {
+    async jwt({ token, account,user }) {
       if (account?.provider === "google") {
         const res = await axios
-          .post(`${process.env.BACKEND_ENDPOINT_DEV}/auth/login-google`, {
+          .post(`${process.env.NEXT_PUBLIC_BACKEND}/auth/login-google`, {
             credential: account.id_token,
           })
           .catch((err) => {
             console.log(err);
           });
         token.accessToken = res?.data.accessToken
+      } else if (account?.provider === "credentials"){
+        token.accessToken = user?.accessToken
       }
       return token
     },

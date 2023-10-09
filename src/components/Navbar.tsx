@@ -1,43 +1,76 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { useRouter,usePathname } from "next/navigation";
-import { IBlog } from "../types/Blog";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import logo from "../app/assets/logo.png";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { setUser,deleteUser } from "../store/slice/userSlice";
+import { IUser } from "../types/User";
+import axios from "axios";
+
+const navMenu = [
+  {
+    title: "Home",
+    linkTo: "/",
+  },
+  {
+    title: "Location",
+    linkTo: "/location",
+  },
+  {
+    title: "About us",
+    linkTo: "#aboutus",
+  },
+  {
+    title: "Contact",
+    linkTo: "#contact",
+  },
+];
 
 export default function Navbar() {
   const { data: user, status } = useSession();
-  const pathname = usePathname()
+  const pathname = usePathname();
+  const dispacth = useAppDispatch();
+  const userInfo: IUser | null = useAppSelector((state) => state.user.user);
   const [isProfileToggle, setIsProfileToggle] = useState(false);
   const [isBarsToggle, setIsBarsToggle] = useState(false);
-  console.log(user);
 
-  const navMenu = [
-    {
-      title: "Home",
-      linkTo: "/",
-    },
-    {
-      title: "Location",
-      linkTo: "/location",
-    },
-    {
-      title: "About us",
-      linkTo: "#aboutus",
-    },
-    {
-      title: "Contact",
-      linkTo: "#contact",
-    },
-  ];
+  const fetchUser = async () => {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND}/users/user/me`, {
+      headers: {
+        Authorization: `Bearer ${user?.accessToken}`,
+      },
+    });
+
+    dispacth(setUser(res.data));
+    console.log(userInfo);
+  };
+
+  const handleSignout = () =>{
+    deleteUser()
+    signOut()
+    setIsBarsToggle(false)
+  }
+
+  useEffect(() => {
+    if (user) {
+      fetchUser();
+    }
+  }, [user]);
+
+  
   return (
     <>
-      <div className={`${pathname === "/signin" || pathname === "/register" ? "hidden" : ""} fixed h-20 w-full z-50 top-0 left-0 flex items-center justify-between py-4 lg:px-16 px-8 font-karnit bg-white border-b-2`}>
+      <div
+        className={`${
+          pathname === "/signin" || pathname === "/register" ? "hidden" : ""
+        } fixed h-20 w-full z-50 top-0 left-0 flex items-center justify-between py-4 lg:px-16 px-8 font-karnit bg-white border-b-2`}
+      >
         <div>
           <Link href="/">
             <Image
@@ -63,7 +96,7 @@ export default function Navbar() {
           })}
         </div>
         <div className="lg:block hidden">
-          {status != null && status === "authenticated" && user != null ? (
+          {status != null && status === "authenticated" && userInfo != null ? (
             <div className="flex">
               <div className="flex items-center p-2 border-2 rounded-xl cursor-pointer">
                 <FontAwesomeIcon
@@ -78,10 +111,10 @@ export default function Navbar() {
                 className="flex items-center w-36 whitespace-nowrap overflow-hidden p-2 border-2 rounded-xl cursor-pointer relative"
                 onClick={() => setIsProfileToggle(!isProfileToggle)}
               >
-                {user.user?.image ? (
+                {userInfo?.profile ? (
                   <Image
                     alt=""
-                    src={user.user.image}
+                    src={userInfo.profile}
                     width={30}
                     height={30}
                     sizes="100vw"
@@ -90,7 +123,7 @@ export default function Navbar() {
                 ) : (
                   ""
                 )}
-                <h1 className="ml-3">{user.user?.name}</h1>
+                <h1 className="ml-3">{userInfo?.name}</h1>
               </div>
               <div
                 className={`absolute  right-16  z-0 bg-gray-200 px-8 py-4 rounded ${
@@ -99,7 +132,9 @@ export default function Navbar() {
               >
                 <ul className="space-y-3">
                   <li className="cursor-pointer">บัญชีของฉัน</li>
-                  <li className="cursor-pointer" onClick={() => signOut()}>ออกจากระบบ</li>
+                  <li className="cursor-pointer" onClick={() => handleSignout()}>
+                    ออกจากระบบ
+                  </li>
                 </ul>
               </div>
             </div>
@@ -125,25 +160,35 @@ export default function Navbar() {
           {navMenu.map((val, index) => {
             return (
               <div className="text-white text-lg my-3" key={index}>
-                <Link href={val.linkTo} onClick={()=>setIsBarsToggle(false)}>{val.title}</Link>
+                <Link href={val.linkTo} onClick={() => setIsBarsToggle(false)}>
+                  {val.title}
+                </Link>
               </div>
             );
           })}
           {status != null && status === "authenticated" && user != null ? (
             <>
               <div className="text-white text-lg my-3">
-                <Link href="/bookmark" onClick={()=>setIsBarsToggle(false)}>Bookmark</Link>
+                <Link href="/bookmark" onClick={() => setIsBarsToggle(false)}>
+                  Bookmark
+                </Link>
               </div>
               <div className="text-white text-lg my-3">
-                <Link href="/profile" onClick={()=>setIsBarsToggle(false)}>บัญชีของฉัน</Link>
+                <Link href="/profile" onClick={() => setIsBarsToggle(false)}>
+                  บัญชีของฉัน
+                </Link>
               </div>
-              <div className="text-white text-lg my-3">
-                <Link href="/" onClick={()=>setIsBarsToggle(false)}>ออกจากระบบ</Link>
+              <div className="text-white text-lg my-3" onClick={()=>handleSignout()}>
+                <h1>
+                  ออกจากระบบ
+                </h1>
               </div>
             </>
           ) : (
-            <div className="text-white text-lg my-3">
-                <Link href="/" onClick={()=>setIsBarsToggle(false)}>Signin</Link>
+            <div className="text-white text-lg my-3" onClick={()=>signIn()}>
+               <h1>
+                  Signin
+                </h1>
             </div>
           )}
         </div>

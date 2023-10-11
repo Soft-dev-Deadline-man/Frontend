@@ -5,7 +5,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { string } from "yup";
 
 interface carouselProps {
   studentId: string;
@@ -17,7 +16,7 @@ interface carouselProps {
 }
 
 export default function Carousel() {
-  const [curr, setCurr] = useState<number>(2);
+  const [curr, setCurr] = useState<number>(0);
 
   const prevFunction = () => {
     var x = curr;
@@ -44,70 +43,70 @@ export default function Carousel() {
       studentId: "64010516",
       name: "ปัณณวิชญ์ วชิรเศรษฐหิรัญ",
       role: '"Devops"',
-      pic: "",
+      pic: "imgProfile/boat.png",
       nickname: "Boat",
     },
     {
       studentId: "64010597",
       name: "พิภูษณะ พิงคะสัน",
       role: '"Frontend"',
-      pic: "",
+      pic: "imgProfile/nay.jpg",
       nickname: "Nay",
     },
     {
       studentId: "64010659",
       name: "ภัทราภรณ์ จันเดชา",
       role: '"UX/UI & Frontend"',
-      pic: "",
+      pic: "imgProfile/jan.png",
       nickname: "Jan",
     },
     {
       studentId: "64010681",
       name: "ภูมิ ไพรศรี",
       role: '"Frontend"',
-      pic: "",
+      pic: "imgProfile/non.jpg",
       nickname: "Non",
     },
     {
       studentId: "64010720",
       name: "รสริน นิยมสันติสุข",
       role: '"Backend"',
-      pic: "",
+      pic: "imgProfile/yaya.png",
       nickname: "Yaya",
     },
     {
       studentId: "64010755",
       name: "วรชนนน์ ชัยประเสริฐสุด",
       role: '"Backend"',
-      pic: "",
+      pic: "imgProfile/pune.png",
       nickname: "Pune",
     },
     {
       studentId: "64010761",
       name: "วรพล รังษี",
       role: '"Backend"',
-      pic: "",
+      pic: "imgProfile/nine.png",
       nickname: "Nine",
     },
     {
       studentId: "64010845",
       name: "ศิรสิทธิ์ เทียนเจริญชัย",
       role: '"Frontend"',
-      pic: "",
+      pic: "imgProfile/oot.png",
       nickname: "Oot",
     },
     {
       studentId: "64011204",
       name: "พัฒพนพล ชัยวงษา",
       role: '"Frontend"',
-      pic: "",
+      pic: "imgProfile/aof.jpg",
       nickname: "Aof",
     },
   ];
 
   return (
     <div>
-      <div className=" flex flex-row gap-x-10 mt-5">
+      <div className="flex flex-row justify-center gap-x-10 mt-5">
         <div
           className={`border-2 border-white rounded-xl w-64 cursor-pointer  ${
             curr - 1 < 0 ? " opacity-0" : "opacity-30"
@@ -126,7 +125,7 @@ export default function Carousel() {
           </div>
           <div className="flex justify-center my-4 ">
             <img
-              className="bg-white w-16 h-16 rounded-full"
+              className="bg-white w-16 h-16 rounded-full object-cover"
               src={curr - 1 < 0 ? "" : person[curr - 1].pic}
             />
           </div>
@@ -141,7 +140,7 @@ export default function Carousel() {
           </div>
           <div className="flex justify-center my-4 ">
             <img
-              className="bg-white w-16 h-16 rounded-full"
+              className="bg-white w-16 h-16 rounded-full object-cover"
               src={person[curr].pic}
             />
           </div>
@@ -164,7 +163,7 @@ export default function Carousel() {
           </div>
           <div className="flex justify-center my-4 ">
             <img
-              className="bg-white w-16 h-16 rounded-full"
+              className="bg-white w-16 h-16 rounded-full object-cover"
               src={curr + 1 > 8 ? "" : person[curr + 1].pic}
             />
           </div>

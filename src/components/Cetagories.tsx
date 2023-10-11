@@ -10,7 +10,7 @@ interface CetagoriesProps {
 export default function Cetagories({ name, place, pic }: CetagoriesProps) {
   return (
     <Link href={name}>
-      <div className="flex flex-row items-center border-2 w-auto">
+      <div className="flex flex-row items-center w-auto">
         <div className=" w-[162px] rounded-md">
           <img src={pic} className="object-cover"></img>
         </div>

@@ -3,8 +3,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
-import { Pagination } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronCircleLeft,
+  faChevronCircleRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 export default function CarouselTest() {
   const person = [
@@ -82,32 +89,79 @@ export default function CarouselTest() {
     },
   ];
 
+  const [curr, setCurr] = useState<number>(5);
+
+  const prevCurr = (curr: number) => {
+    setCurr((curr += 1));
+    console.log(curr);
+  };
+
+  const nextCurr = (curr: number) => {
+    setCurr((curr -= 1));
+    console.log(curr);
+  };
   return (
-    <>
-        
-    </>
-    // <div className=" relative">
-    //   <ul className=" flex overflow-x-auto text-center text-black w-screen gap-14 m-0 mt-10 snap-x translate-x-800">
-    //     <div className=" absolute">
-    //       <div className=" bg-white w-60"></div>
-    //     </div>
+    // <div className=" text-black">
+    //   <Swiper
+    //     slidesPerView={4}
+    //     spaceBetween={50}
+    //     centeredSlides={true}
+    //     modules={[Pagination, Navigation]}
+    //     navigation={true}
+    //   >
     //     {person.map((e) => (
-    //       <li
-    //         id={e.id}
-    //         className=" flex flex-col justify-center rounded-2xl items-center snap-center"
-    //       >
-    //         <div className="bg-white text-2xl w-80 p-7 snap-center rounded-3xl after:w-100 before:w-100">
+    //       <SwiperSlide className=" w-80 py-7 rounded-2xl flex flex-row">
+    //         <div>
     //           <div>{e.studentId}</div>
     //           <div>{e.name}</div>
     //           <div>{e.role}</div>
-    //           <div>{e.id}</div>
     //         </div>
-    //         <div className=" my-7 w-16 bg-black h-16 rounded-full ">
+    //         <div className=" w-16 bg-white">
     //           <img></img>
     //         </div>
-    //       </li>
+    //       </SwiperSlide>
     //     ))}
-    //   </ul>
+    //   </Swiper>
     // </div>
+    <div className=" relative">
+      <ul className=" flex overflow-x-auto text-center text-black w-screen gap-14 m-0 mt-10 snap-x translate-x-800">
+        <div className=" absolute">
+          <div className=" bg-white w-60"></div>
+        </div>
+        {person.map((e) => (
+          <li
+            id={e.id}
+            className=" flex flex-col justify-center rounded-xl items-center snap-center"
+          >
+            <div className="bg-white text-xl w-72 p-3 snap-center rounded-xl after:w-100 before:w-100">
+              <div>{e.studentId}</div>
+              <div>{e.name}</div>
+              <div>{e.role}</div>
+              <div>{e.id}</div>
+            </div>
+            <div className=" my-7 w-16 bg-black h-16 rounded-full ">
+              <img></img>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div className=" flex justify-center items-center w-screen border-2">
+        <div></div>
+        <div className=" flex justify-between items-center">
+          <FontAwesomeIcon
+            onClick={(curr) => prevCurr}
+            icon={faChevronCircleLeft}
+            className="cursor-pointer"
+          />
+          {person[curr].nickname}
+          <FontAwesomeIcon
+            onClick={(curr) => nextCurr}
+            icon={faChevronCircleRight}
+            className="cursor-pointer"
+          />
+        </div>
+        <div></div>
+      </div>
+    </div>
   );
 }

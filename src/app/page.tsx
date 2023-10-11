@@ -12,6 +12,7 @@ import { faB, faSquare, faStar } from "@fortawesome/free-solid-svg-icons";
 import Carousel from "@/components/Carousel";
 import CarouselTest from "@/components/CarouselTest";
 import Link from "next/link";
+import MyComponent from "@/components/GoogleMap";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -89,9 +90,9 @@ export default function Home() {
         </div>
       </div>
       {/* Preview */}
-      <section className="flex mx-4 items-center h-[444px]">
+      <section className="flex mx-4 items-center gap-x-10 h-[444px]">
         <div className=" flex-1">
-          <img></img>
+          <img src="/sea_1.png"></img>
         </div>
 
         <div className="flex-1">
@@ -131,7 +132,7 @@ export default function Home() {
       {/* Cetagories */}
       <section className=" mx-4">
         <h1 className=" text-4xl mb-4">Cetagories</h1>
-        <div className=" flex flex-row gap-y-5 flex-wrap border-2 justify-center">
+        <div className=" flex flex-row gap-y-5 flex-wrap  justify-center">
           {cetagories.map((e) => (
             <Cetagories name={e.name} pic={e.pic} place={e.place} />
           ))}
@@ -151,13 +152,22 @@ export default function Home() {
       </section>
 
       {/* Map */}
-      <section>
-        <img src="/map.png" className="w-screen h-full mt-7" />
+      <section className=" md:flex justify-around  items-center  my-4">
+        <div className=" sm:text-center flex flex-col">
+          <h1 className=" sm:text-center md:text-start text-3xl">Find Your</h1>
+          <h2 className="sm:text-center md:text-start ">Road Trip in CHON</h2>
+          <p className="sm:text-center md:text-start text-sm text-[#276968]">
+            Everything you need to organize your trip
+          </p>
+        </div>
+        <div className=" sm:flex justify-center">
+          <MyComponent />
+        </div>
       </section>
 
       {/* Testtimonial */}
-      <section className=" bg-person w-screen text-white">
-        <div className="ml-4 w-screen flex flex-col items-center">
+      <section className=" bg-person w-screen bg-no-repeat text-white pb-4">
+        <div className=" w-screen flex flex-col items-center">
           <p className=" text-sm mt-8">Testimonials</p>
           <h1 className=" text-3xl">About us</h1>
           <div className=" my-5 flex flex-row gap-4 text-[#FE940A]">
@@ -175,10 +185,10 @@ export default function Home() {
             of the south.
           </p>
         </div>
-          <CarouselTest />
+        <Carousel />
       </section>
 
-      <footer className="text-white pd-4 bg-[#276968] w-screen m-0 flex flex-row justify-between flex-wrap p-4">
+      <footer className="text-white pd-4 bg-[#276968] w-screen flex flex-row justify-between flex-wrap p-4">
         <div>
           <img src="./Header.png" />
           <div className="flex flex-row justify-between">

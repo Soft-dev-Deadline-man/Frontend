@@ -34,6 +34,7 @@ export default function Home() {
       {JSON.stringify(allBlogs)}
       <button onClick={updateBlogs}>update blog</button>
       <button onClick={()=>router.push('/signin')}>go to sign in</button>
+      <button onClick={()=>router.push('/account')}>go to profile</button>
     </main>
   );
 }

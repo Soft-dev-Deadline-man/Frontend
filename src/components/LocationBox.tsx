@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { IBlog } from "../types/Blog";
 import Image from "next/image";
 
-export default function LocationBox({ blogInfo }: { blogInfo: IBlog | null }) {
+export default function LocationBox({ blogInfo }: { blogInfo: IBlog | null | any }) {
   const [firstImage,setFirstImage] =useState<any>(null)
   const { data: session, status } = useSession();
   const { push } = useRouter();
@@ -35,7 +35,7 @@ export default function LocationBox({ blogInfo }: { blogInfo: IBlog | null }) {
             <h4 className="mr-1">{blogInfo.rating}</h4>
             <FontAwesomeIcon icon={faStar} style={{ color: "#ffffff" }} />
           </div>
-          {blogInfo.reviews.length} รีวิว
+          {/* {blogInfo.reviews.length} รีวิว */}
         </div>
         <h3 className="text-[#8A8A8A] my-2">{blogInfo.catagory}</h3>
       </div>

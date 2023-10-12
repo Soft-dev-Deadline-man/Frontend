@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { Preahvihear, Kanit } from "next/font/google";
 import ReduxProvider from "../providers/redux-provider";
 import AuthProvider from "../providers/nextauth-provider";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Roadtrip in CHON",
@@ -35,7 +36,11 @@ export default function RootLayout({
     <html lang="en" className={`${preahvihear.variable} ${karla.variable} ${karla.variable}`}>
       <body>
         <ReduxProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <Providers>
+              {children}
+            </Providers>
+          </AuthProvider>
         </ReduxProvider>
       </body>
     </html>

@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ["cdn1.iconfinder.com", "api.slingacademy.com','lh3.googleusercontent.com"],
+    domains: ["cdn1.iconfinder.com", "api.slingacademy.com","lh3.googleusercontent.com"],
   },
   output: "standalone",
 };

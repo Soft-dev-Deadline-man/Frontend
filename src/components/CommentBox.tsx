@@ -40,7 +40,7 @@ export default function CommentBox({
           <div className="col-span-1 relative" key={key}>
             {key == 3 ? (
               <div
-                className="absolute z-50 bg-black/[0.25] w-full h-full flex justify-center items-center text-white"
+                className="absolute z-30 bg-black/[0.25] w-full h-full flex justify-center items-center text-white"
                 onClick={() => handleShowImage()}
               >
                 {commentInfo.images.length - 4}+

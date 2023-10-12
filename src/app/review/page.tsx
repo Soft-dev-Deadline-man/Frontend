@@ -16,8 +16,31 @@ export default function page() {
     const ProfileUrl = "https://cdn.pic.in.th/file/picinth/tommy.png";
     const BackgroundUrl = "https://cdn.pic.in.th/file/picinth/bgdcca7009fd1b7f73.png";
     const LogoUrl = "https://cdn.pic.in.th/file/picinth/logoa1979d25595efb53.png";
-    const Edit = "https://cdn.pic.in.th/file/picinth/Vector797beeee58cd47a2.png";
     const EditIcon ="https://cdn.pic.in.th/file/picinth/edit-icon.png";
+    const [profileImage, setProfileImage] = useState(ProfileUrl);
+
+    const handleUploadProfileImage = (image: File) => {
+        try {
+          // ตรวจสอบนามสกุลของไฟล์ภาพที่อัปโหลด
+          const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+          if (!allowedExtensions.exec(image.name)) {
+            throw new Error('ไฟล์ต้องเป็นรูปภาพเฉพาะ (jpg, jpeg, png)');
+          }
+      
+          const reader = new FileReader();
+      
+          reader.onload = () => {
+            // เมื่ออ่านไฟล์เสร็จสิ้น
+            const dataURL = reader.result as string;
+            setProfileImage(dataURL);
+          };
+      
+          // อ่านไฟล์ภาพเพื่อแปลงเป็น URL
+          reader.readAsDataURL(image);
+        } catch (error) {
+          console.error('เกิดข้อผิดพลาดในการอัปโหลด:', error);
+        }
+      };
 
     return (
         <div className="h-screen overflow-y-auto">
@@ -28,11 +51,11 @@ export default function page() {
                 </div>
                 <div className="profile-header mx-auto">
                     <div className="relative rounded-full h-48 w-48 -translate-y-1/2">
-                        <img src={ProfileUrl}></img>
-                        <button onClick={()=>setIsVisibles(true)} className='absolute -bottom-5 right-0'>
-                            <div className="flex justify-center items-center rounded-full h-12 w-12 bg-[#FF6F6B] -translate-y-1/2">
-                                <img className="w-8 h-8" src={EditIcon}></img>
-                            </div>
+                        <img src={profileImage} alt="Profile" className='rounded-full h-48 w-48'></img>
+                        <button onClick={() => setIsVisibles(true)} className="absolute -bottom-5 right-0">
+                        <div className="flex justify-center items-center rounded-full h-12 w-12 bg-[#FF6F6B] -translate-y-1/2">
+                            <img className="w-8 h-8" src={EditIcon} alt="Edit" />
+                        </div>
                         </button>
                     </div>
                 </div>
@@ -67,7 +90,7 @@ export default function page() {
                      </button>
                 </div>
             </div>
-            <ModalUploadProfile onCloses={handleOnCloses} visibles={isVisibles}/>
+            <ModalUploadProfile onCloses={handleOnCloses} visibles={isVisibles} onUpload={handleUploadProfileImage} />
             <ModalEditReview onClose={handleOnClose} visible={isVisible}/>
             <Footer/>
         </div>

@@ -17,7 +17,7 @@ export default function Page() {
     return (
         <div className="h-screen flex flex-col">
             <Navbar LogoUrl={LogoUrl} ProfileUrl={ProfileUrl} /> 
-            <div className='flex justify-start mb-16 mt-28 ms-10'>
+            <div className='flex justify-start mb-4 mt-28 ms-10'>
                 <button onClick={()=>router.push('/review')}>
                     <img src={Back}></img>
                 </button>

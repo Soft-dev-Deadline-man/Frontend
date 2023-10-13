@@ -42,7 +42,7 @@ export default function LocationBox({
           <div className="flex my-2">
             {blogInfo.openTime.map((opneTime: any, key: any) => {
               return (
-                <div className="mr-2">
+                <div className="mr-2" key={key}>
                   <div className="flex items-center">
                     <FontAwesomeIcon
                       icon={faCalendarDay}

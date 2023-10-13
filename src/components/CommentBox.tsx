@@ -9,6 +9,7 @@ import { ICommentInfo } from "@/types/Comment";
 import Image from "next/image";
 import Rating from "./Rating";
 import AllImageModal from "./AllImageModal";
+import LikeComment from "./LikeComment";
 
 export default function CommentBox({
   commentInfo,
@@ -52,57 +53,71 @@ export default function CommentBox({
           </div>
         );
       });
-    } else if(commentInfo.images.length > 0 && commentInfo.images.length <= 4) {
+    } else if (
+      commentInfo.images.length > 0 &&
+      commentInfo.images.length <= 4
+    ) {
       return commentInfo.images.map((img, key) => {
         return (
-          <div className="col-span-1 h-48 w-48 relative min-w-[16rem]" key={key}>
+          <div
+            className="col-span-1 h-48 w-48 relative min-w-[16rem]"
+            key={key}
+          >
             <Image alt="" src={img} fill sizes="100vw"></Image>
           </div>
         );
       });
-    }else{
-      return null
+    } else {
+      return null;
     }
   }, []);
 
   return (
-  <>
-  <div className="w-full my-2 bg-[#F8F8F8] p-4 font-karnit rounded-xl">
-      <div className="flex items-center mb-2">
-        <Image
-          alt=""
-          src={`${commentInfo.author.profile}`}
-          width={50}
-          height={50}
-          className="rounded-[50%] mr-2"
-        ></Image>
-        <h1>{commentInfo.author.name}</h1>
+    <>
+      <div className="w-full my-2 bg-[#F8F8F8] p-4 font-karnit rounded-xl">
+        <div className="w-full flex justify-between">
+          <div className="flex items-center mb-2">
+            <Image
+              alt=""
+              src={`${commentInfo.author.profile}`}
+              width={50}
+              height={50}
+              className="rounded-[50%] mr-2"
+            ></Image>
+            <h1>{commentInfo.author.name}</h1>
+          </div>
+          <LikeComment reviewId="1" score={5}/>
+        </div>
+        <div className="flex items-center my-2">
+          <Rating
+            setVote={null}
+            rating={commentInfo.rating}
+            vote={false}
+            size="text-xl"
+            mx="mx-1"
+          />
+        </div>
+        <div className="my-2">
+          <h1>{commentInfo.title}</h1>
+        </div>
+        <div className="my-2">
+          <p>{commentInfo.description}</p>
+        </div>
+        <div className="my-2">
+          <h5>กิจกรรมแนะนำ : {commentInfo.recommendActivity}</h5>
+        </div>
+        <div className="my-2">
+          <h5>ระยะเวลาที่ใช้กับสถาานที่นี้ : {commentInfo.spendTime}</h5>
+        </div>
+        <div className="w-full grid grid-cols-4 gap-1 min-w-min overflow-x-scroll">
+          {showImg}
+        </div>
       </div>
-      <div className="flex items-center my-2">
-        <Rating
-          setVote={null}
-          rating={commentInfo.rating}
-          vote={false}
-          size="text-xl"
-          mx="mx-1"
-        />
-      </div>
-      <div className="my-2">
-        <h1>{commentInfo.title}</h1>
-      </div>
-      <div className="my-2">
-        <p>{commentInfo.description}</p>
-      </div>
-      <div className="my-2">
-        <h5>กิจกรรมแนะนำ : {commentInfo.recommendActivity}</h5>
-      </div>
-      <div className="my-2">
-        <h5>ระยะเวลาที่ใช้กับสถาานที่นี้ : {commentInfo.spendTime}</h5>
-      </div>
-      <div className="w-full grid grid-cols-4 gap-1 min-w-min overflow-x-scroll">{showImg}</div>
-    </div>
-    {showImage ? <AllImageModal photos={commentInfo.images} setShow={setShowImage}/> : ""}
-  </>
-    
+      {showImage ? (
+        <AllImageModal photos={commentInfo.images} setShow={setShowImage} />
+      ) : (
+        ""
+      )}
+    </>
   );
 }

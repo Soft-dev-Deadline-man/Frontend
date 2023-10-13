@@ -37,7 +37,7 @@ export default function CommentBox({
       const temp = commentInfo.images.slice(0, 4);
       return temp.map((img, key) => {
         return (
-          <div className="col-span-1 relative min-w-[16rem]" key={key}>
+          <div className="col-span-1 h-48 relative min-w-[16rem]" key={key}>
             {key == 3 ? (
               <div
                 className="absolute z-30 bg-black/[0.25] w-full h-full flex justify-center items-center text-white"
@@ -52,14 +52,16 @@ export default function CommentBox({
           </div>
         );
       });
-    } else {
+    } else if(commentInfo.images.length > 0 && commentInfo.images.length <= 4) {
       return commentInfo.images.map((img, key) => {
         return (
-          <div className="col-span-1 relative min-w-[16rem]" key={key}>
+          <div className="col-span-1 h-48 w-48 relative min-w-[16rem]" key={key}>
             <Image alt="" src={img} fill sizes="100vw"></Image>
           </div>
         );
       });
+    }else{
+      return null
     }
   }, []);
 
@@ -69,7 +71,7 @@ export default function CommentBox({
       <div className="flex items-center mb-2">
         <Image
           alt=""
-          src={`${commentInfo.author.img}`}
+          src={`${commentInfo.author.profile}`}
           width={50}
           height={50}
           className="rounded-[50%] mr-2"
@@ -97,7 +99,7 @@ export default function CommentBox({
       <div className="my-2">
         <h5>ระยะเวลาที่ใช้กับสถาานที่นี้ : {commentInfo.spendTime}</h5>
       </div>
-      <div className="w-full h-48 grid grid-cols-4 gap-1 min-w-min overflow-x-scroll">{showImg}</div>
+      <div className="w-full grid grid-cols-4 gap-1 min-w-min overflow-x-scroll">{showImg}</div>
     </div>
     {showImage ? <AllImageModal photos={commentInfo.images} setShow={setShowImage}/> : ""}
   </>

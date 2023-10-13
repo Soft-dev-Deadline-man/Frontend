@@ -15,7 +15,8 @@ export interface ICommentInfo {
   title: string;
   author : {
     name : string
-    img : string
+    profile : string
+    _id : string
   }
   description: string;
   recommendActivity: string;

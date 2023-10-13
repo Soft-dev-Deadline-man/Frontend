@@ -12,6 +12,7 @@ export interface IBlog {
     rate4: number;
     rate5: number;
   };
+  reviewLength : number;
   reviews: Array<object>; //change to IComment after
   latitude: string;
   longitude: string;

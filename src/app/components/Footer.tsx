@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div className="w-full h-52 flex justify-center space-x-32 bg-[#276968] p-4">
+    <div className="w-full flex justify-center space-x-32 bg-[#276968] p-4">
       <div className="flex flex-col">
         <a className="text-white">Link</a>
         <a className="text-xs text-white p-2">Stays</a>

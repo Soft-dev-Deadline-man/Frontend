@@ -44,7 +44,7 @@ export default function page() {
       };
 
     return (
-        <div className="overflow-y-auto">
+        <div className="h-screen ">
             <Navbar LogoUrl={LogoUrl} ProfileUrl={ProfileUrl} /> 
             <div className="flex flex-col z-10">
                 <div className="relative h-96 w-full">
@@ -82,16 +82,16 @@ export default function page() {
                 </div>
             </div>
             <div className="flex flex-col mr-auto p-8 rounded-lg w-5/6 mx-auto mb-16 border-2 border-[#276968] bg-gray-100">
-                <a className="text-gray-500 mb-1">Name</a>
-                <a className="text-lg mb-4">Tommy</a>
-                <a className="text-gray-500 mb-1">Email</a>
-                <a className="text-lg mb-4">tommychalon@gmail.com</a>
-                <a className="text-gray-500 mb-1">Password</a>
-                <a className="text-lg mb-4">********</a>
-                <a className="text-gray-500 mb-8">Bio</a>
-                <a className="flex w-496 py-3 gap-2">
-                    <a className="text-gray-500 p-2 rounded-lg border-2 border-[#276968]">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</a>
-                </a>
+                <p className="text-gray-500 mb-1">Name</p>
+                <p className="text-lg mb-4">Tommy</p>
+                <p className="text-gray-500 mb-1">Email</p>
+                <p className="truncate ... text-lg mb-4">tommychalon@gmail.com</p>
+                <p className="text-gray-500 mb-1">Password</p>
+                <p className="text-lg mb-4">********</p>
+                <p className="text-gray-500 mb-8">Bio</p>
+                <p className="flex w-496 py-3 gap-2">
+                    <p className="text-gray-500 p-2 rounded-lg border-2 border-[#276968]">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                </p>
                 <div className="flex justify-center items-end p-6">
                     <button onClick={()=>setIsVisible(true)} className="flex flex-row justify-center rounded-lg w-28 h-12 py-3 gap-2 text-[#276968] border-2 border-[#276968]">
                         <img src={Edit}></img>

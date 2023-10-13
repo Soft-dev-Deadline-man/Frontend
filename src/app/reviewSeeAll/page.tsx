@@ -15,7 +15,7 @@ export default function Page() {
     const Back = "https://cdn.pic.in.th/file/picinth/Button.png";
 
     return (
-        <div className="h-screen flex flex-col">
+        <div className="overflow-y-auto">
             <Navbar LogoUrl={LogoUrl} ProfileUrl={ProfileUrl} /> 
             <div className='flex justify-start mb-4 mt-28 ms-10'>
                 <button onClick={()=>router.push('/review')}>

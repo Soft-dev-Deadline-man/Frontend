@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { useState } from 'react';
 import { useRouter } from "next/navigation";
 import Navbar from '../components/Navbar';
@@ -38,7 +38,7 @@ export default function page() {
           // อ่านไฟล์ภาพเพื่อแปลงเป็น URL
           reader.readAsDataURL(image);
         } catch (error) {
-          console.error('เกิดข้อผิดพลาดในการอัปโหลด:', error);
+          console.error('An error occurred uploading:', error);
         }
       };
 
@@ -64,19 +64,19 @@ export default function page() {
                     <a className="text-gray-500 text-xs">Email</a>
                 </div>
             </div>
-            <div className="flex h-14 w-full bg-gray-100 my-auto mb-4">
-                <div className="flex justify-center space-x-52 w-full">
+            <div className="flex w-full bg-gray-100 my-auto mb-4">
+                <div className="flex justify-evenly w-full py-2">
                     <div className="flex flex-col justify-center">
                         <button className="text-[#276968]" onClick={()=>router.push('/account')}>Account</button>
                     </div>
                     <a className="my-auto text-gray-300"> {" | "} </a>
                     <div className="flex flex-col justify-center">
                         <button className="text-[#276968]" onClick={()=>router.push('/review')}>My Review</button>
-                        <a className="flex rounded-lg w-20 mb-2 mx-auto border-2 border-[#276968]"></a>
+                        <a className="flex rounded-lg w-24 mb-2 mx-auto border-2 border-[#276968]"></a>
                     </div>
                     <a className="my-auto text-gray-300"> {" | "} </a>
                     <div className="flex flex-col justify-center">
-                        <button className="text-[#276968]" onClick={()=>router.push('/bookmark')}>Bookmark</button>
+                        <button className="text-[#276968]" onClick={()=>router.push('')}>Bookmark</button>
                     </div>
                 </div>
             </div>

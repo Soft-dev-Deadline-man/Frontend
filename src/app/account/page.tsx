@@ -44,7 +44,7 @@ export default function page() {
       };
 
     return (
-        <div className="h-screen overflow-y-auto">
+        <div className="overflow-y-auto">
             <Navbar LogoUrl={LogoUrl} ProfileUrl={ProfileUrl} /> 
             <div className="flex flex-col z-10">
                 <div className="relative h-96 w-full">
@@ -65,8 +65,8 @@ export default function page() {
                     <a className="text-gray-500 text-xs">Email</a>
                 </div>
             </div>
-            <div className="flex h-14 w-full bg-gray-100 my-auto mb-4">
-                <div className="flex justify-center space-x-52 w-full">
+            <div className="flex w-full bg-gray-100 my-auto mb-4">
+                <div className="flex justify-evenly w-full py-2">
                     <div className="flex flex-col justify-center">
                         <button className="text-[#276968]" onClick={()=>router.push('/account')}>Account</button>
                         <a className="flex rounded-lg w-16 mb-2 mx-auto border-2 border-[#276968]"></a>
@@ -77,28 +77,26 @@ export default function page() {
                     </div>
                     <a className="my-auto text-gray-300"> {" | "} </a>
                     <div className="flex flex-col justify-center">
-                        <button className="text-[#276968]" onClick={()=>router.push('/bookmark')}>Bookmark</button>
+                        <button className="text-[#276968]" onClick={()=>router.push('')}>Bookmark</button>
                     </div>
                 </div>
             </div>
-            <div className="rounded-lg w-5/6 mx-auto mb-16 border-2 border-[#276968] bg-gray-100 h-128">
-                <div className="flex flex-col mr-auto p-8">
-                    <a className="text-gray-500 mb-1">Name</a>
-                    <a className="text-lg mb-4">Tommy</a>
-                    <a className="text-gray-500 mb-1">Email</a>
-                    <a className="text-lg mb-4">tommychalon@gmail.com</a>
-                    <a className="text-gray-500 mb-1">Password</a>
-                    <a className="text-lg mb-4">********</a>
-                    <a className="text-gray-500 mb-8">Bio</a>
-                    <a className="flex rounded-lg w-496 h-40 py-3 gap-2 border-2 border-[#276968]">
-                        <a className="text-gray-500 p-7">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</a>
-                    </a>
-                    <div className="flex justify-center items-end p-6">
-                        <button onClick={()=>setIsVisible(true)} className="flex flex-row justify-center rounded-lg w-28 h-12 py-3 gap-2 text-[#276968] border-2 border-[#276968]">
-                            <img src={Edit}></img>
-                            Edit
-                        </button>
-                    </div>
+            <div className="flex flex-col mr-auto p-8 rounded-lg w-5/6 mx-auto mb-16 border-2 border-[#276968] bg-gray-100">
+                <a className="text-gray-500 mb-1">Name</a>
+                <a className="text-lg mb-4">Tommy</a>
+                <a className="text-gray-500 mb-1">Email</a>
+                <a className="text-lg mb-4">tommychalon@gmail.com</a>
+                <a className="text-gray-500 mb-1">Password</a>
+                <a className="text-lg mb-4">********</a>
+                <a className="text-gray-500 mb-8">Bio</a>
+                <a className="flex w-496 py-3 gap-2">
+                    <a className="text-gray-500 p-2 rounded-lg border-2 border-[#276968]">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</a>
+                </a>
+                <div className="flex justify-center items-end p-6">
+                    <button onClick={()=>setIsVisible(true)} className="flex flex-row justify-center rounded-lg w-28 h-12 py-3 gap-2 text-[#276968] border-2 border-[#276968]">
+                        <img src={Edit}></img>
+                        Edit
+                    </button>
                 </div>
             </div>
             <ModalEdit onClose={handleOnClose} visible={isVisible}/>

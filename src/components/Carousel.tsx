@@ -108,7 +108,7 @@ export default function Carousel() {
     <div>
       <div className="flex flex-row justify-center gap-x-10 mt-5">
         <div
-          className={`border-2 border-white rounded-xl w-64 cursor-pointer  ${
+          className={`border-2 border-white rounded-xl w-72 cursor-pointer  ${
             curr - 1 < 0 ? " opacity-0" : "opacity-30"
           }`}
         >
@@ -131,7 +131,7 @@ export default function Carousel() {
           </div>
         </div>
         <div
-          className={`border-2 border-white rounded-xl w-64 after:delay-1000`}
+          className={`border-2 border-white rounded-xl w-72 after:delay-1000`}
         >
           <div className=" bg-white text-black text-xl text-center rounded-xl m-3 py-4 ">
             <p className=" text-lg">{person[curr].studentId}</p>
@@ -146,7 +146,7 @@ export default function Carousel() {
           </div>
         </div>
         <div
-          className={`border-2 border-white rounded-xl w-64 ${
+          className={`border-2 border-white rounded-xl w-72 ${
             curr + 1 > 8 ? "opacity-0" : "opacity-30"
           }`}
         >

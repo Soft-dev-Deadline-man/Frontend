@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import { string } from "yup";
 
 const containerStyle = {
   width: "600px",
@@ -11,11 +12,12 @@ const center = {
   lng: 101.2377832,
 };
 
-function MyComponent() {
+function GoogleMapComponent() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyAURPv2U0fzw17NkOYT3Mt__HvRrlQwriE",
+    googleMapsApiKey: process.env.GOOGLE_MAP_KE,
   });
+  // const [mapMarker, setMapmarker] = useState([{lat:},{},{}]);
 
   const [map, setMap] = useState<any>();
 
@@ -35,16 +37,16 @@ function MyComponent() {
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={9}
+      zoom={10}
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
       {/* Child components, such as markers, info windows, etc. */}
-      <></>
+      {}
     </GoogleMap>
   ) : (
     <></>
   );
 }
 
-export default React.memo(MyComponent);
+export default React.memo(GoogleMapComponent);

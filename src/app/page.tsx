@@ -12,7 +12,7 @@ import { faB, faSquare, faStar } from "@fortawesome/free-solid-svg-icons";
 import Carousel from "@/components/Carousel";
 import CarouselTest from "@/components/CarouselTest";
 import Link from "next/link";
-import MyComponent from "@/components/GoogleMap";
+import GoogleMapComponent from "@/components/GoogleMap";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -30,8 +30,8 @@ export default function Home() {
 
   // const temp:Array<IBlog> = [rawTemp]
 
-  console.log(session);
-  console.log(status);
+  // console.log(session);
+  // console.log(status);
   const updateBlogs = () => {
     console.log("oot");
     // dispatch(setBlog(temp))
@@ -91,7 +91,7 @@ export default function Home() {
       </div>
       {/* Preview */}
       <section className="flex mx-4 items-center gap-x-10 h-[444px]">
-        <div className=" flex-1">
+        <div className=" flex-1 px-10">
           <img src="/sea_1.png"></img>
         </div>
 
@@ -143,49 +143,46 @@ export default function Home() {
       <section className=" my-10 mx-4">
         <p className="text-[#276968]">Top destination</p>
         <h1 className=" text-4xl mb-4">Popular</h1>
-        <div className=" flex flex-row flex-wrap gap-3 justify-center bg-[#F3F3F3] rounded-3xl p-8">
-          <Popular />
-          <Popular />
-          <Popular />
-          <Popular />
-        </div>
+        <Popular />
       </section>
 
       {/* Map */}
-      <section className=" md:flex justify-around  items-center  my-4">
+      <section className=" md:flex gap-y-10 justify-around  items-center  my-4">
         <div className=" sm:text-center flex flex-col">
-          <h1 className=" sm:text-center md:text-start text-3xl">Find Your</h1>
+          <h1 className=" sm:text-center md:text-start text-4xl font-bold">Find Your</h1>
           <h2 className="sm:text-center md:text-start ">Road Trip in CHON</h2>
           <p className="sm:text-center md:text-start text-sm text-[#276968]">
             Everything you need to organize your trip
           </p>
         </div>
         <div className=" sm:flex justify-center">
-          <MyComponent />
+          <GoogleMapComponent />
         </div>
       </section>
 
       {/* Testtimonial */}
-      <section className=" bg-person w-screen bg-no-repeat text-white pb-4">
-        <div className=" w-screen flex flex-col items-center">
-          <p className=" text-sm mt-8">Testimonials</p>
-          <h1 className=" text-3xl">About us</h1>
-          <div className=" my-5 flex flex-row gap-4 text-[#FE940A]">
-            <FontAwesomeIcon icon={faStar} />
-            <FontAwesomeIcon icon={faStar} />
-            <FontAwesomeIcon icon={faStar} />
-            <FontAwesomeIcon icon={faStar} />
-            <FontAwesomeIcon icon={faStar} />
+      <section className="w-screen bg-no-repeat text-white">
+        <div className=" bg-person object-fill bg-repeat-space pb-4">
+          <div className=" w-screen flex flex-col items-center">
+            <p className=" text-sm mt-8">Testimonials</p>
+            <h1 className=" text-3xl">About us</h1>
+            <div className=" my-5 flex flex-row gap-4 text-[#FE940A]">
+              <FontAwesomeIcon icon={faStar} />
+              <FontAwesomeIcon icon={faStar} />
+              <FontAwesomeIcon icon={faStar} />
+              <FontAwesomeIcon icon={faStar} />
+              <FontAwesomeIcon icon={faStar} />
+            </div>
+            <p className=" w-2/3 text-center text-sm font-light">
+              We are web application developers. For people with passion for
+              travelling Chonburi, Thailand offers places of breathtaking
+              natural beauty waiting for you to discover, from the span of
+              towering mountains of the north to the tropical powdery-white
+              sandy beaches of the south.
+            </p>
           </div>
-          <p className=" w-2/3 text-center text-sm font-light">
-            We are web application developers. For people with passion for
-            travelling Chonburi, Thailand offers places of breathtaking natural
-            beauty waiting for you to discover, from the span of towering
-            mountains of the north to the tropical powdery-white sandy beaches
-            of the south.
-          </p>
+          <Carousel />
         </div>
-        <Carousel />
       </section>
 
       <footer className="text-white pd-4 bg-[#276968] w-screen flex flex-row justify-between flex-wrap p-4">

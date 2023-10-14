@@ -249,7 +249,7 @@ export default function Location({
                 />{" "}
                 เขียนรีวิว
               </div>
-              <Bookmark blogID="0" />
+              <Bookmark blogID={locationId} />
             </div>
           </div>
 

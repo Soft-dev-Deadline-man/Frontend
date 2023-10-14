@@ -19,14 +19,15 @@ export default function Login() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    console.log(data.get("email"))
     await signIn("credentials", {
       redirect: false,
-      email: data.get("email"),
+      username: data.get("email"),
       password: data.get("password"),
     }).then((res)=>{
       console.log(res)
       if(res?.error){
-        alert("Worng Password")
+        alert(res.error)
       }else{
         router.push("/")
       }

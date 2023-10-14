@@ -16,19 +16,18 @@ const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/auth/login-email`, {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" },
-        });
-
-        const user = await res.json();
-
-        if (user.error) {
-          throw new Error( JSON.stringify({ errors: user.error, status: false  }))
+        try{
+          const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND}/auth/login-email`,{
+            email : credentials?.username,
+            password : credentials?.password
+          }, {
+            headers: { "Content-Type": "application/json" },
+          });
+          const user = res.data
+          return user
+        }catch(err : any){
+          throw new Error(err.response.data.message)
         }
-
-        return user;
       },
     }),
   ],

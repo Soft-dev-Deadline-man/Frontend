@@ -15,7 +15,8 @@ export interface ICommentInfo {
   title: string;
   author : {
     name : string
-    img : string
+    profile : string
+    _id : string
   }
   description: string;
   recommendActivity: string;
@@ -23,4 +24,5 @@ export interface ICommentInfo {
   rating: number;
   score: number; //vote-up, vote-down
   images: string[];
+  id:string;
 }

@@ -52,7 +52,7 @@ export default function Navbar() {
   };
 
   const handleSignout = () =>{
-    deleteUser()
+    dispacth(deleteUser())
     signOut()
     setIsBarsToggle(false)
   }

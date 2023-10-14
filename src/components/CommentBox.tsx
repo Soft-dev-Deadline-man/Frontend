@@ -86,7 +86,7 @@ export default function CommentBox({
             ></Image>
             <h1>{commentInfo.author.name}</h1>
           </div>
-          <LikeComment reviewId="1" score={5}/>
+          <LikeComment reviewId={commentInfo.id} score={commentInfo.score}/>
         </div>
         <div className="flex items-center my-2">
           <Rating

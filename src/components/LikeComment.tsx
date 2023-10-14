@@ -5,27 +5,63 @@ import { useSession } from "next-auth/react";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp as farThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { setUser } from "../store/slice/userSlice";
+import { IUser } from "../types/User";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
 
 export default function LikeComment({ reviewId,score }: { reviewId: string,score : number }) {
-  const { data: session, status} = useSession();
+  const { data: user, status} = useSession();
+  const userInfo: IUser | null = useAppSelector((state) => state.user.user);
   const { push } = useRouter();
   const [checkUseful, setCheckUseful] = useState(false);
   const [isLike,setIsLike] = useState(false)
+  const dispacth = useAppDispatch()
   const [countScore,setCountScore] =useState<number>(0)
 
-  const temp = {
-    user: {
-      likeRevgiew: ["1", "2"],
-    },
-  };
-
-  const handleClick = () => {
+  const handleClick = async() => {
     if (status === "authenticated") {
-      //call API
-      if(isLike === checkUseful && checkUseful === true){
-        setCountScore(countScore-1)
-      }else if(isLike !== checkUseful && checkUseful === false){
+      if(checkUseful == true){
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND}/review/dislike/${reviewId}`,null,{
+          headers: {
+            Authorization: `Bearer ${user?.accessToken}`,
+          },
+        })
+        if(res.status == 201){
+          const updateUser = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND}/users/user/me`,
+            {
+              headers: {
+                Authorization: `Bearer ${user?.accessToken}`,
+              },
+            }
+          );
+          dispacth(setUser(updateUser.data));
+        } 
+      }else if(checkUseful == false){
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND}/review/like/${reviewId}`,null,{
+          headers: {
+            Authorization: `Bearer ${user?.accessToken}`,
+          },
+        })
+        if(res.status == 201){
+          const updateUser = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND}/users/user/me`,
+            {
+              headers: {
+                Authorization: `Bearer ${user?.accessToken}`,
+              },
+            }
+          );
+          dispacth(setUser(updateUser.data));
+        }
+      }
+      if(isLike === false && !checkUseful === true){
         setCountScore(countScore+1)
+        setIsLike(true)
+      }else if(isLike === true && !checkUseful === false){
+        setCountScore(countScore-1)
+        setIsLike(false)
       }
       return setCheckUseful(!checkUseful);
     }
@@ -34,8 +70,8 @@ export default function LikeComment({ reviewId,score }: { reviewId: string,score
 
   useEffect(() => {
     setCountScore(score)
-    if (temp) {
-      if (temp.user.likeRevgiew.includes(reviewId)) {
+    if (userInfo) {
+      if (userInfo.likedReview.includes(reviewId)) {
         setIsLike(true)
         return setCheckUseful(true);
       }
@@ -46,7 +82,7 @@ export default function LikeComment({ reviewId,score }: { reviewId: string,score
     return setCheckUseful(false);
   }, []);
 
-  const isBookmark = useMemo(() => {
+  const isUseful = useMemo(() => {
     if (checkUseful) {
       return (
         <div className="items-center p-2 cursor-pointer flex">
@@ -65,5 +101,5 @@ export default function LikeComment({ reviewId,score }: { reviewId: string,score
 
   console.log(checkUseful)
 
-  return <div onClick={handleClick}>{isBookmark}</div>;
+  return <div onClick={handleClick}>{isUseful}</div>;
 }

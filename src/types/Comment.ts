@@ -24,4 +24,5 @@ export interface ICommentInfo {
   rating: number;
   score: number; //vote-up, vote-down
   images: string[];
+  id:string;
 }

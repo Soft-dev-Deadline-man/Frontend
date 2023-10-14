@@ -48,10 +48,6 @@ export default function CommentPage({
     redirect('/signin')
   }
 
-  useEffect(() => {
-    // setBlog(blogTemp);
-  }, []);
-
   const inputValue =
     (name: string) =>
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -124,10 +120,6 @@ export default function CommentPage({
       }
     );
   };
-
-  console.log(user?.accessToken)
-
-  console.log(comment)
 
   const handleSaveReview = () => {
     if(comment.rating == 0){

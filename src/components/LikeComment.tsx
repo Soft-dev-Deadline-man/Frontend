@@ -87,17 +87,17 @@ export default function LikeComment({ reviewId,score }: { reviewId: string,score
       return (
         <div className="items-center p-2 cursor-pointer flex">
           <FontAwesomeIcon icon={faThumbsUp} style={{color: "#e81a54"}}/>
-          <p className="text-[#e81a54] mx-2">มีประโยชน์ {`(${countScore})`}</p>
+          <p className="text-[#e81a54] mx-2 sm:text-base text-xs">มีประโยชน์ {`(${countScore})`}</p>
         </div>
       );
     }
     return (
-      <div className="items-center rounded-xl p-2 cursor-pointer flex">
+      <div className="items-center rounded-xl p-2 cursor-pointer flex sm:text-base text-xs">
         <FontAwesomeIcon icon={farThumbsUp} style={{color: "#000000"}}/>
         <p className="mx-2">มีประโยชน์ {`(${countScore})`}</p>
       </div>
     );
   }, [checkUseful,countScore]);
 
-  return <div onClick={handleClick}>{isUseful}</div>;
+  return <div onClick={handleClick} className="min-w-fit">{isUseful}</div>;
 }

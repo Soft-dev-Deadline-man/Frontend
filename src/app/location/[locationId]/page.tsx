@@ -226,7 +226,7 @@ export default function Location({
             <div className=" border-b-2 border-[#D9D9D9] w-full my-2"></div>
             <div className="flex my-2">
               <div
-                className="p-2 flex bg-[#276968] items-center text-white rounded-xl mr-2"
+                className="p-2 flex bg-[#276968] items-center text-white rounded-xl mr-2 cursor-pointer"
                 onClick={() => router.push(`/comment/${locationId}`)}
               >
                 <FontAwesomeIcon

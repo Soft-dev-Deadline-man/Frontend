@@ -41,6 +41,6 @@ export default function LocationBox({ blogInfo }: { blogInfo: IBlog | null }) {
       </div>
     </div>
   ) : (
-    <div>null</div>
+    <div>ASDFGHJKL</div>
   );
 }

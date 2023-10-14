@@ -40,7 +40,7 @@ export default function Register() {
         if(res.status == 201){
           await signIn("credentials", {
             redirect: true,
-            email: checkData.email,
+            username: checkData.email,
             password: checkData.password,
             callbackUrl: "/",
           })

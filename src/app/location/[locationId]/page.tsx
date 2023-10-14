@@ -34,7 +34,6 @@ export default function Location({
   params: { locationId: string };
 }) {
   const router = useRouter();
-  const [imgArray, setImgArray] = useState<any[]>([]);
   const [showImage, setShowImage] = useState<boolean>(false);
   const [blog, setBlog] = useState<IBlog | null>(null);
   const [comment, setComment] = useState<ICommentInfo[] | null>(null);
@@ -54,18 +53,6 @@ export default function Location({
   });
 
   const fetchData = async () => {
-    await axios
-      .get(
-        "https://api.slingacademy.com/v1/sample-data/photos?offset=0&limit=50"
-      )
-      .then((res) => {
-        const response = res.data.photos;
-        const userValues = response.map((item: any) => item.url);
-        setImgArray(userValues);
-      });
-  };
-
-  const fetchData2 = async () => {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_BACKEND}/blogs/${locationId}`
     );
@@ -78,30 +65,31 @@ export default function Location({
   };
 
   const sortComment = async () => {
-    let sortData: ICommentInfo[]
     if (sortType == 0) {
       await setComment(initComment);
     } else if (sortType == 1 && comment != null) {
-      sortData = await comment.sort(
-        (a: ICommentInfo, b: ICommentInfo): number => {
-          return a.rating - b.rating;
-        }
-      );
+      const sortData =[...comment].sort((a: ICommentInfo, b: ICommentInfo)=>{
+        return b.rating - a.rating;
+      })
       await setComment(sortData);
     }
     else if(sortType == 2 && comment != null){
-      sortData = await comment.sort(
-        (a: ICommentInfo, b: ICommentInfo): number => {
-          return b.rating - a.rating;
-        }
-      )
+      const sortData =[...comment].sort((a: ICommentInfo, b: ICommentInfo)=>{
+        return a.rating - b.rating;
+      })
       await setComment(sortData);
     }
-    else if(sortType == 3){
-        
+    else if(sortType == 3 && comment != null){
+      const sortData =[...comment].sort((a: ICommentInfo, b: ICommentInfo)=>{
+        return b.score - a.score;
+      })
+      await setComment(sortData);
     }
-    else if(sortType == 4){
-        
+    else if(sortType == 4 && comment != null){
+      const sortData =[...comment].sort((a: ICommentInfo, b: ICommentInfo)=>{
+        return a.score - b.score;
+      })
+      await setComment(sortData);
     }
   };
 
@@ -109,7 +97,6 @@ export default function Location({
 
   useEffect(() => {
     fetchData();
-    fetchData2();
   }, []);
 
   console.log(blog);
@@ -165,13 +152,13 @@ export default function Location({
   }, [blog]);
 
   const commentComponent = useMemo(() => {
-    console.log("oot74754353")
     if (comment != null) {
       console.log("oot893423042")
       console.log(comment)
       return (
         <div className="w-full max-w-screen-xl px-4">
           {comment.map((val, key) => {
+            console.log(val.score)
             return <CommentBox commentInfo={val} key={key} />;
           })}
         </div>
@@ -546,7 +533,7 @@ export default function Location({
             <label tabIndex={0} className="btn m-1">
               เรียงลำดับ :{" "}
               {sortType == 0
-                ? "ใหม่ - เก่า"
+                ? "เริ่มต้น"
                 : sortType == 1
                 ? "เรตติ้งมาก - น้อย"
                 : sortType == 2
@@ -562,13 +549,19 @@ export default function Location({
               className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a onClick={()=>setSortType(0)}>ใหม่ - เก่า</a>
+                <a onClick={()=>setSortType(0)}>เริ่มต้น</a>
               </li>
               <li>
                 <a onClick={()=>setSortType(1)}>เรตติ้งมาก - น้อย</a>
               </li>
               <li>
-                <a onClick={()=>setSortType(2)}>เรตติ้งน้อย - มาย</a>
+                <a onClick={()=>setSortType(2)}>เรตติ้งน้อย - มาก</a>
+              </li>
+              <li>
+                <a onClick={()=>setSortType(3)}>มีประโยชน์มาก - น้อย</a>
+              </li>
+              <li>
+                <a onClick={()=>setSortType(4)}>มีประโยชน์น้อย - มาก</a>
               </li>
             </ul>
           </div>
@@ -577,8 +570,8 @@ export default function Location({
       </div>
 
       {commentComponent}
-      {showImage ? (
-        <AllImageModal photos={imgArray} setShow={setShowImage} />
+      {showImage && blog.images !=undefined ?  (
+        <AllImageModal photos={blog.images} setShow={setShowImage} />
       ) : (
         ""
       )}

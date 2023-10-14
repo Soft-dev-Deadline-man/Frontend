@@ -31,7 +31,6 @@ export default function CommentBox({
       document.body.style.overflow = "unset";
     }
   }, [showImage]);
-  //get location by ID
 
   const showImg = useMemo(() => {
     if (commentInfo.images.length > 4) {
@@ -41,7 +40,7 @@ export default function CommentBox({
           <div className="col-span-1 h-48 relative min-w-[16rem]" key={key}>
             {key == 3 ? (
               <div
-                className="absolute z-30 bg-black/[0.25] w-full h-full flex justify-center items-center text-white"
+                className="absolute z-30 bg-black/[0.25] w-full h-full flex justify-center items-center text-white rounded-lg"
                 onClick={() => handleShowImage()}
               >
                 {commentInfo.images.length - 4}+
@@ -49,7 +48,7 @@ export default function CommentBox({
             ) : (
               ""
             )}
-            <Image alt="" src={img} fill sizes="100vw"></Image>
+            <Image alt="" src={img} fill sizes="100vw" className="rounded-lg"></Image>
           </div>
         );
       });
@@ -63,7 +62,7 @@ export default function CommentBox({
             className="col-span-1 h-48 w-48 relative min-w-[16rem]"
             key={key}
           >
-            <Image alt="" src={img} fill sizes="100vw"></Image>
+            <Image alt="" src={img} fill sizes="100vw" className="rounded-lg"></Image>
           </div>
         );
       });
@@ -74,7 +73,7 @@ export default function CommentBox({
 
   return (
     <>
-      <div className="w-full my-2 bg-[#F8F8F8] p-4 font-karnit rounded-xl">
+      <div className="w-full my-2 mb-5 bg-[#F8F8F8] p-4 font-karnit rounded-xl">
         <div className="w-full flex justify-between">
           <div className="flex items-center mb-2">
             <Image
@@ -97,16 +96,16 @@ export default function CommentBox({
             mx="mx-1"
           />
         </div>
-        <div className="my-2">
+        <div className="my-2 text-xl">
           <h1>{commentInfo.title}</h1>
         </div>
-        <div className="my-2">
+        <div className="my-2 text-[#8A8A8A]">
           <p>{commentInfo.description}</p>
         </div>
-        <div className="my-2">
+        <div className="my-2 text-[#8A8A8A]">
           <h5>กิจกรรมแนะนำ : {commentInfo.recommendActivity}</h5>
         </div>
-        <div className="my-2">
+        <div className="my-2 text-[#8A8A8A]">
           <h5>ระยะเวลาที่ใช้กับสถาานที่นี้ : {commentInfo.spendTime}</h5>
         </div>
         <div className="w-full grid grid-cols-4 gap-1 min-w-min overflow-x-scroll">

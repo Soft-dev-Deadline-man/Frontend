@@ -80,7 +80,7 @@ export default function LikeComment({ reviewId,score }: { reviewId: string,score
     }
     setIsLike(false)
     return setCheckUseful(false);
-  }, []);
+  }, [reviewId]);
 
   const isUseful = useMemo(() => {
     if (checkUseful) {
@@ -97,9 +97,7 @@ export default function LikeComment({ reviewId,score }: { reviewId: string,score
         <p className="mx-2">มีประโยชน์ {`(${countScore})`}</p>
       </div>
     );
-  }, [checkUseful]);
-
-  console.log(checkUseful)
+  }, [checkUseful,countScore]);
 
   return <div onClick={handleClick}>{isUseful}</div>;
 }

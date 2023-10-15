@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { usePathname } from "next/navigation";
+import { usePathname,useRouter} from "next/navigation";
 import Image from "next/image";
 import logo from "../app/assets/logo.png";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setUser,deleteUser } from "../store/slice/userSlice";
 import { IUser } from "../types/User";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const navMenu = [
   {
@@ -32,9 +33,14 @@ const navMenu = [
   },
 ];
 
+type jwtType = {
+  userId: string;
+};
+
 export default function Navbar() {
   const { data: user, status } = useSession();
   const pathname = usePathname();
+  const router = useRouter();
   const dispacth = useAppDispatch();
   const userInfo: IUser | null = useAppSelector((state) => state.user.user);
   const [isProfileToggle, setIsProfileToggle] = useState(false);
@@ -131,7 +137,10 @@ export default function Navbar() {
                 }`}
               >
                 <ul className="space-y-3">
-                  <li className="cursor-pointer">บัญชีของฉัน</li>
+                  <li className="cursor-pointer" onClick={()=>{
+                    router.push(`/profile/${jwt_decode<jwtType>(user.accessToken).userId}`)
+                    setIsProfileToggle(false)
+                  }}>บัญชีของฉัน</li>
                   <li className="cursor-pointer" onClick={() => handleSignout()}>
                     ออกจากระบบ
                   </li>
@@ -174,7 +183,7 @@ export default function Navbar() {
                 </Link>
               </div>
               <div className="text-white text-lg my-3">
-                <Link href="/profile" onClick={() => setIsBarsToggle(false)}>
+                <Link href={`/profile/${jwt_decode<jwtType>(user.accessToken).userId}`} onClick={() => setIsBarsToggle(false)}>
                   บัญชีของฉัน
                 </Link>
               </div>

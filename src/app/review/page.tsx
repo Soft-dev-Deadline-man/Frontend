@@ -90,7 +90,7 @@ export default function page() {
                      </button>
                 </div>
             </div>
-            <ModalUploadProfile onCloses={handleOnCloses} visibles={isVisibles} onUpload={handleUploadProfileImage} />
+            <ModalUploadProfile onClose={handleOnCloses} visibles={isVisibles} onUpload={handleUploadProfileImage} />
             <ModalEditReview onClose={handleOnClose} visible={isVisible}/>
             <Footer/>
         </div>

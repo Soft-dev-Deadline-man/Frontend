@@ -3,11 +3,11 @@ import Image from 'next/image';
 
 interface ModalUploadProfileProps {
   visibles: boolean;
-  onCloses: () => void;
+  onClose: () => void;
   onUpload: (image: File) => void;
 }
 
-const ModalUploadProfile: React.FC<ModalUploadProfileProps> = ({ visibles, onCloses, onUpload }) => {
+const ModalUploadProfile: React.FC<ModalUploadProfileProps> = ({ visibles, onClose, onUpload }) => {
   if (!visibles) return null;
 
   const addImage = useRef<HTMLInputElement>(null);
@@ -17,7 +17,7 @@ const ModalUploadProfile: React.FC<ModalUploadProfileProps> = ({ visibles, onClo
     if (addImage.current && addImage.current.files) {
       const image = addImage.current.files[0];
       onUpload(image); // เรียกใช้ prop onUpload ด้วยรูปที่เลือก
-      onCloses(); // ปิด modal หลังจากอัปโหลด
+      onClose(); // ปิด modal หลังจากอัปโหลด
     }
   };
 
@@ -25,7 +25,7 @@ const ModalUploadProfile: React.FC<ModalUploadProfileProps> = ({ visibles, onClo
     <div className="fixed flex justify-center items-center inset-0 bg-black bg-opacity-30 backdrop-blur-sm z-30">
       <div className="rounded-lg w-2/6 mx-auto mb-16 bg-gray-100 h-128 mb-5">
         <div className="flex justify-end me-4 mt-4">
-          <button onClick={onCloses}>
+          <button onClick={onClose}>
             <img src={Exit}/>
           </button>
         </div>

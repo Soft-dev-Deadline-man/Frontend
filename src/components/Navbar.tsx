@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { usePathname,useRouter} from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import logo from "../app/assets/logo.png";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setUser,deleteUser } from "../store/slice/userSlice";
+import { setUser, deleteUser } from "../store/slice/userSlice";
 import { IUser } from "../types/User";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
@@ -47,21 +47,24 @@ export default function Navbar() {
   const [isBarsToggle, setIsBarsToggle] = useState(false);
 
   const fetchUser = async () => {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND}/users/user/me`, {
-      headers: {
-        Authorization: `Bearer ${user?.accessToken}`,
-      },
-    });
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND}/users/user/me`,
+      {
+        headers: {
+          Authorization: `Bearer ${user?.accessToken}`,
+        },
+      }
+    );
 
     dispacth(setUser(res.data));
     console.log(userInfo);
   };
 
-  const handleSignout = () =>{
-    dispacth(deleteUser())
-    signOut()
-    setIsBarsToggle(false)
-  }
+  const handleSignout = () => {
+    dispacth(deleteUser());
+    signOut();
+    setIsBarsToggle(false);
+  };
 
   useEffect(() => {
     if (user) {
@@ -69,7 +72,6 @@ export default function Navbar() {
     }
   }, [user]);
 
-  
   return (
     <>
       <div
@@ -104,14 +106,22 @@ export default function Navbar() {
         <div className="lg:block hidden">
           {status != null && status === "authenticated" && userInfo != null ? (
             <div className="flex">
-              <div className="flex items-center p-2 border-2 rounded-xl cursor-pointer">
+              <Link
+                className="flex items-center p-2 border-2 rounded-xl cursor-pointer"
+                href={{
+                  pathname: `/profile/${
+                    jwt_decode<jwtType>(user.accessToken).userId
+                  }`,
+                  query: { state: "3" },
+                }}
+              >
                 <FontAwesomeIcon
                   icon={faBookmark}
                   style={{ color: "#276968" }}
                   className="text-xl"
                 />
                 <h1 className="ml-3">Bookmark</h1>
-              </div>
+              </Link>
               <div className="border-l-2 mx-5"></div>
               <div
                 className="flex items-center w-36 whitespace-nowrap overflow-hidden p-2 border-2 rounded-xl cursor-pointer relative"
@@ -137,11 +147,23 @@ export default function Navbar() {
                 }`}
               >
                 <ul className="space-y-3">
-                  <li className="cursor-pointer" onClick={()=>{
-                    router.push(`/profile/${jwt_decode<jwtType>(user.accessToken).userId}`)
-                    setIsProfileToggle(false)
-                  }}>บัญชีของฉัน</li>
-                  <li className="cursor-pointer" onClick={() => handleSignout()}>
+                  <li
+                    className="cursor-pointer"
+                    onClick={() => {
+                      router.push(
+                        `/profile/${
+                          jwt_decode<jwtType>(user.accessToken).userId
+                        }`
+                      );
+                      setIsProfileToggle(false);
+                    }}
+                  >
+                    บัญชีของฉัน
+                  </li>
+                  <li
+                    className="cursor-pointer"
+                    onClick={() => handleSignout()}
+                  >
                     ออกจากระบบ
                   </li>
                 </ul>
@@ -178,26 +200,35 @@ export default function Navbar() {
           {status != null && status === "authenticated" && user != null ? (
             <>
               <div className="text-white text-lg my-3">
-                <Link href="/bookmark" onClick={() => setIsBarsToggle(false)}>
+                <Link href={{
+                  pathname: `/profile/${
+                    jwt_decode<jwtType>(user.accessToken).userId
+                  }`,
+                  query: { state: "3" },
+                }} onClick={() => setIsBarsToggle(false)}>
                   Bookmark
                 </Link>
               </div>
               <div className="text-white text-lg my-3">
-                <Link href={`/profile/${jwt_decode<jwtType>(user.accessToken).userId}`} onClick={() => setIsBarsToggle(false)}>
+                <Link
+                  href={`/profile/${
+                    jwt_decode<jwtType>(user.accessToken).userId
+                  }`}
+                  onClick={() => setIsBarsToggle(false)}
+                >
                   บัญชีของฉัน
                 </Link>
               </div>
-              <div className="text-white text-lg my-3" onClick={()=>handleSignout()}>
-                <h1>
-                  ออกจากระบบ
-                </h1>
+              <div
+                className="text-white text-lg my-3"
+                onClick={() => handleSignout()}
+              >
+                <h1>ออกจากระบบ</h1>
               </div>
             </>
           ) : (
-            <div className="text-white text-lg my-3" onClick={()=>signIn()}>
-               <h1>
-                  Signin
-                </h1>
+            <div className="text-white text-lg my-3" onClick={() => signIn()}>
+              <h1>Signin</h1>
             </div>
           )}
         </div>

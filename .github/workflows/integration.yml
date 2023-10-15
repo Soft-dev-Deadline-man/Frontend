@@ -8,6 +8,14 @@ on:
     branches:
       - main
 
+env:
+  GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+  GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+  GOOGLE_MAP_KEY: ${{ secrets.GOOGLE_MAP_KEY }}
+  NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+  NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+  NEXT_PUBLIC_BACKEND: ${{ secrets.NEXT_PUBLIC_BACKEND }}
+
 jobs:
   build-and-test:
     name: Build
@@ -29,4 +37,12 @@ jobs:
         run: yarn install
 
       - name: Build NextJS application
-        run: yarn build
+        run: |
+          touch .env.local
+          echo GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} >> .env.local
+          echo GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} >> .env.local
+          echo GOOGLE_MAP_KEY=${{ secrets.GOOGLE_MAP_KEY }} >> .env.local
+          echo NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} >> .env.local
+          echo NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} >> .env.local
+          echo NEXT_PUBLIC_BACKEND=${{ secrets.NEXT_PUBLIC_BACKEND }} >> .env.local
+          yarn build

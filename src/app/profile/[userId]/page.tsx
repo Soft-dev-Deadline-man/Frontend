@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setUser, deleteUser } from "../../../store/slice/userSlice";
 import { IUser } from "../../../types/User";
 import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
@@ -33,6 +33,7 @@ export default function Profile({
   params: { userId: string };
 }) {
   const { data: user, status } = useSession();
+  const searchParams = useSearchParams()
   const userInfo: IUser | null = useAppSelector((state) => state.user.user);
   const [fetchUser, setFetchUser] = useState<IUser | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -43,6 +44,7 @@ export default function Profile({
   const [showEditPassword, setShowEditPassword] = useState<boolean>(false);
   const [review, setReview] = useState<ICommentInfo[] | null>(null);
   const [bookmark, setBookmark] = useState<IAllBlog[] | null>(null);
+  const state = searchParams.get("state")
 
   const getUserById = async (id: string) => {
     const res = await axios.get(
@@ -75,6 +77,9 @@ export default function Profile({
     }
     getBookmarkByUserId(userId);
     getReviewByUserId(userId);
+    if(state != null){
+      setContent(parseInt(state))
+    }
   }, [status]);
 
   const getReviewByUserId = async (id: string) => {

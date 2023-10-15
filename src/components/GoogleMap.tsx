@@ -68,7 +68,6 @@ function GoogleMapComponent() {
           position={{ lat: Number(e.latidude), lng: Number(e.longtitude) }}
           onClick={() => {
             setSelectMarker(e._id);
-            console.log(e.openTime.time);
           }}
         >
           {selectMarker === e._id ? (

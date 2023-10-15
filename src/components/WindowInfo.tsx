@@ -14,6 +14,7 @@ export function WindowInfo({
   openTime,
   typo,
 }: WindowInfoProps) {
+    
   return (
     <div className="w-54">
       <div className=" flex justify-center">
@@ -34,4 +35,5 @@ export function WindowInfo({
       </div>
     </div>
   );
+//   652be5ba9b2177f1cd12f648
 }

@@ -23,7 +23,7 @@ export default function LocationBox({
 
   return blogInfo != null ? (
     <div className="flex flex-wrap bg-[#F8F8F8] rounded-xl overflow-hidden w-full h-[32] relative font-karnit">
-      <div className="md:w-[30%] sm:w-[40%] w-[100%] sm:h-64 h-48 relative">
+      <div className="md:w-[30%] sm:w-[40%] w-[100%] sm:h-72 h-48 relative">
         {blogInfo.firstImage ? (
           <Image src={blogInfo.firstImage} fill sizes="100vw" alt=""></Image>
         ) : (

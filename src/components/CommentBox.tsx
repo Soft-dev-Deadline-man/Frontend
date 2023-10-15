@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark , faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark as farBookmark } from "@fortawesome/free-regular-svg-icons";
 import { useRouter } from "next/navigation";
 import { ICommentInfo } from "@/types/Comment";
@@ -10,14 +10,18 @@ import Image from "next/image";
 import Rating from "./Rating";
 import AllImageModal from "./AllImageModal";
 import LikeComment from "./LikeComment";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 export default function CommentBox({
   commentInfo,
+  canEdit,
 }: {
   commentInfo: ICommentInfo;
+  canEdit: boolean;
 }) {
-  const { data: session, status } = useSession();
-  const { push } = useRouter();
+  const { data: user, status } = useSession();
+  const router = useRouter();
   const [showImage, setShowImage] = useState(false);
 
   const handleShowImage = () => {
@@ -31,6 +35,38 @@ export default function CommentBox({
       document.body.style.overflow = "unset";
     }
   }, [showImage]);
+
+  const handleDeleteComment = async()=>{
+    Swal.fire({
+      title: "ลบรีวิวนี้",
+      confirmButtonText: "บันทึก",
+      confirmButtonColor: "#276968",
+      showCancelButton: true,
+      cancelButtonText: "ยกเลิก",
+      cancelButtonColor: "#276968",
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND}/review/${commentInfo.id}`,{
+          headers: {
+            Authorization: `Bearer ${user?.accessToken}`,
+          },
+        }).then((e) => {
+          if(e.status == 200){
+            Swal.fire("Saved!", "", "success").then(res=>{
+              if(res.isConfirmed == true)
+              window.location.reload()
+            })
+          }else{
+            Swal.fire({
+              icon: "error",
+              title: "ไม่สามารถลบรีวิวนี้ได้",
+            });
+          }
+        });
+      }
+    });
+
+  }
 
   const showImg = useMemo(() => {
     if (commentInfo.images.length > 4) {
@@ -48,7 +84,14 @@ export default function CommentBox({
             ) : (
               ""
             )}
-            <Image alt="" src={img} width={0} height={0} sizes="100vw" className="rounded-lg lg:w-56 lg:h-56 md:w-44 md:h-44 w-36 h-36"></Image>
+            <Image
+              alt=""
+              src={img}
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="rounded-lg lg:w-56 lg:h-56 md:w-44 md:h-44 w-36 h-36"
+            ></Image>
           </div>
         );
       });
@@ -58,11 +101,15 @@ export default function CommentBox({
     ) {
       return commentInfo.images.map((img, key) => {
         return (
-          <div
-            className="relative min-w-fit"
-            key={key}
-          >
-            <Image alt="" src={img} width={0} height={0} sizes="100vw" className="rounded-lg lg:w-56 lg:h-56 md:w-44 md:h-44 w-36 h-36"></Image>
+          <div className="relative min-w-fit" key={key}>
+            <Image
+              alt=""
+              src={img}
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="rounded-lg lg:w-56 lg:h-56 md:w-44 md:h-44 w-36 h-36"
+            ></Image>
           </div>
         );
       });
@@ -86,7 +133,29 @@ export default function CommentBox({
             ></Image>
             <h1 className="sm:text-base text-xs">{commentInfo.author.name}</h1>
           </div>
-          <LikeComment reviewId={commentInfo.id} score={commentInfo.score}/>
+          <div className="flex items-center">
+            <LikeComment reviewId={commentInfo.id} score={commentInfo.score} />
+            {canEdit ? <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="m-1 cursor-pointer">
+              <FontAwesomeIcon
+                  icon={faEllipsis}
+                  style={{ color: "#000000" }}
+                  size="xl"
+                />
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a onClick={()=>router.push(`/editcomment/${commentInfo.id}`)}>Edit</a>
+                </li>
+                <li>
+                  <a onClick={()=>handleDeleteComment()} >Delete</a>
+                </li>
+              </ul>
+            </div>:""}
+          </div>
         </div>
         <div className="flex items-center my-2">
           <Rating

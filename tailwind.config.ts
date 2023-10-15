@@ -29,7 +29,6 @@ const config: Config = {
       animation: {},
     },
   },
-  darkMode: "class",
-  plugins: [nextui()],
-};
-export default config;
+  plugins: [require("daisyui")],
+}
+export default config

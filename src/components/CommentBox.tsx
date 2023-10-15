@@ -131,7 +131,7 @@ export default function CommentBox({
               sizes="100vw"
               className="rounded-[50%] mr-2 sm:w-[50px] sm:h-[50px] w-[30px] h-[30px]"
             ></Image>
-            <h1 className="sm:text-base text-xs">{commentInfo.author.name}</h1>
+            <h1 className="sm:text-base text-xs cursor-pointer hover:underline" onClick={()=>router.push(`/profile/${commentInfo.author._id}`)}>{commentInfo.author.name}</h1>
           </div>
           <div className="flex items-center">
             <LikeComment reviewId={commentInfo.id} score={commentInfo.score} />

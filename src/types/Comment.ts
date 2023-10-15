@@ -11,12 +11,12 @@ export interface IComment {
 }
 
 export interface ICommentInfo {
-    blogId : string;
+  blogId: string;
   title: string;
-  author : {
-    name : string
-    img : string
-  }
+  author: {
+    name: string;
+    img: string;
+  };
   description: string;
   recommendActivity: string;
   spendTime: string;

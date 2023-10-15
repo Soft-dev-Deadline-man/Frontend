@@ -108,7 +108,7 @@ export default function Carousel() {
     <div>
       <div className="flex flex-row justify-center gap-x-10 mt-5">
         <div
-          className={`border-2 border-white rounded-xl w-72 cursor-pointer  ${
+          className={`border-2 border-white rounded-xl w-72  ${
             curr - 1 < 0 ? " opacity-0" : "opacity-30"
           }`}
         >

@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import { string } from "yup";
+import {
+  GoogleMap,
+  InfoBox,
+  InfoWindow,
+  Marker,
+  useJsApiLoader,
+} from "@react-google-maps/api";
+import axios from "axios";
+import { text } from "stream/consumers";
+import { number } from "yup";
+import { WindowInfo } from "./WindowInfo";
 
 const containerStyle = {
   width: "600px",
@@ -13,9 +22,20 @@ const center = {
 };
 
 function GoogleMapComponent() {
+  const [marker, setMarker] = useState<any[]>([]);
+  const [selectMarker, setSelectMarker] = useState<string>();
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_BACKEND}blogs/all-data`)
+      .then((response) => {
+        setMarker(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: process.env.GOOGLE_MAP_KE,
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY as string,
   });
   // const [mapMarker, setMapmarker] = useState([{lat:},{},{}]);
 
@@ -37,12 +57,33 @@ function GoogleMapComponent() {
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={10}
+      zoom={9}
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
       {/* Child components, such as markers, info windows, etc. */}
-      {}
+      {marker.map((e) => (
+        <Marker
+          key={e._id}
+          position={{ lat: Number(e.latidude), lng: Number(e.longtitude) }}
+          onClick={() => {
+            setSelectMarker(e._id);
+            console.log(e.openTime.time);
+          }}
+        >
+          {selectMarker === e._id ? (
+            <InfoWindow>
+              <WindowInfo
+                id={e._id}
+                img={e.firstImage}
+                title={e.title}
+                openTime={e.openTime}
+                typo={e.category}
+              />
+            </InfoWindow>
+          ) : null}
+        </Marker>
+      ))}
     </GoogleMap>
   ) : (
     <></>

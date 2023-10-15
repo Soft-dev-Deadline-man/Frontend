@@ -23,20 +23,12 @@ export default function Popular() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND}blogs`)
+      .get(`${process.env.NEXT_PUBLIC_BACKEND}blogs/all-data`)
       .then((response) => {
         setTopBlog(response.data);
-
-        topBlog.map((e) => {
-          console.log(e.firstImage);
-        });
-        console.log(topBlog);
       })
       .catch((error) => console.log(error));
   }, []);
-
-  console.log(topBlog);
-
   return (
     // <Link href="#" className="hover:scale-105 transition ease-in-out">
     //   <div className=" w-60 h-64 rounded-3xl shadow-lg">
@@ -65,7 +57,7 @@ export default function Popular() {
         .filter((item, index) => index < 9)
         .map((bl) => (
           <Link
-            href={`${process.env.NEXT_PUBLIC_BACKEND}blogs/${bl._id}`}
+            href={`/location/${bl._id}`}
             className="hover:scale-105 transition ease-in-out"
           >
             <div className=" w-60 h-64 rounded-3xl shadow-lg relative">

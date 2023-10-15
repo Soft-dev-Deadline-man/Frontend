@@ -159,7 +159,7 @@ export default function Location({
         <div className="w-full max-w-screen-xl px-4">
           {comment.map((val, key) => {
             console.log(val.score)
-            return <CommentBox commentInfo={val} key={key} />;
+            return <CommentBox commentInfo={val} key={key} canEdit={false}/>;
           })}
         </div>
       );

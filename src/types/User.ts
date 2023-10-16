@@ -8,5 +8,6 @@ export interface IUser{
     postedBlogs: string[];
     createdAt: string;
     updatedAt: string;
+    bio:string;
     __v: number;
 }

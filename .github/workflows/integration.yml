@@ -29,4 +29,5 @@ jobs:
         run: yarn install
 
       - name: Build NextJS application
-        run: yarn build
+        run:
+          yarn build

@@ -11,3 +11,15 @@ body {
   background-color: var(--background-color-light);
   color: var(--text-color-light);
 }
+  
+@media (prefers-color-scheme: dark) {
+  body {
+    color-scheme: dark;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    color-scheme: light;
+  }
+}

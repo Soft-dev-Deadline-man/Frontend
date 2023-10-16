@@ -57,10 +57,12 @@ export default function Location({
       `${process.env.NEXT_PUBLIC_BACKEND}/blogs/${locationId}`
     );
     setBlog(res.data);
-    const commentRes = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND}/review/get-review-by-blog-id/${locationId}`)
-    console.log(commentRes.data)
+    const commentRes = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND}/review/get-review-by-blog-id/${locationId}`
+    );
+    console.log(commentRes.data);
     setComment(commentRes.data);
-    setInitComment(commentRes.data)
+    setInitComment(commentRes.data);
     setDidFetch(true);
   };
 
@@ -68,32 +70,29 @@ export default function Location({
     if (sortType == 0) {
       await setComment(initComment);
     } else if (sortType == 1 && comment != null) {
-      const sortData =[...comment].sort((a: ICommentInfo, b: ICommentInfo)=>{
+      const sortData = [...comment].sort((a: ICommentInfo, b: ICommentInfo) => {
         return b.rating - a.rating;
-      })
+      });
       await setComment(sortData);
-    }
-    else if(sortType == 2 && comment != null){
-      const sortData =[...comment].sort((a: ICommentInfo, b: ICommentInfo)=>{
+    } else if (sortType == 2 && comment != null) {
+      const sortData = [...comment].sort((a: ICommentInfo, b: ICommentInfo) => {
         return a.rating - b.rating;
-      })
+      });
       await setComment(sortData);
-    }
-    else if(sortType == 3 && comment != null){
-      const sortData =[...comment].sort((a: ICommentInfo, b: ICommentInfo)=>{
+    } else if (sortType == 3 && comment != null) {
+      const sortData = [...comment].sort((a: ICommentInfo, b: ICommentInfo) => {
         return b.score - a.score;
-      })
+      });
       await setComment(sortData);
-    }
-    else if(sortType == 4 && comment != null){
-      const sortData =[...comment].sort((a: ICommentInfo, b: ICommentInfo)=>{
+    } else if (sortType == 4 && comment != null) {
+      const sortData = [...comment].sort((a: ICommentInfo, b: ICommentInfo) => {
         return a.score - b.score;
-      })
+      });
       await setComment(sortData);
     }
   };
 
-  console.log(sortType)
+  console.log(sortType);
 
   useEffect(() => {
     fetchData();
@@ -119,11 +118,11 @@ export default function Location({
     setShowImage(true);
   };
 
-  console.log(initComment)
+  console.log(initComment);
 
   const calRating = useMemo(() => {
-    console.log("ooedskflsdkl")
-    console.log(blog?.reviews)
+    console.log("ooedskflsdkl");
+    console.log(blog?.reviews);
     return blog != null && blog.reviewLength != 0
       ? {
           rating1: `${
@@ -153,13 +152,13 @@ export default function Location({
 
   const commentComponent = useMemo(() => {
     if (comment != null) {
-      console.log("oot893423042")
-      console.log(comment)
+      console.log("oot893423042");
+      console.log(comment);
       return (
         <div className="w-full max-w-screen-xl px-4">
           {comment.map((val, key) => {
-            console.log(val.score)
-            return <CommentBox commentInfo={val} key={key} canEdit={false}/>;
+            console.log(val.score);
+            return <CommentBox commentInfo={val} key={key} canEdit={false} />;
           })}
         </div>
       );
@@ -530,7 +529,10 @@ export default function Location({
         <div className="flex w-full justify-between items-center">
           <h1>รีวิว</h1>
           <div className="dropdown dropdown-end transition-all">
-            <label tabIndex={0} className="btn m-1">
+            <label
+              tabIndex={0}
+              className="btn m-1 bg-white text-black hover:bg-[#276968] hover:text-white"
+            >
               เรียงลำดับ :{" "}
               {sortType == 0
                 ? "เริ่มต้น"
@@ -546,22 +548,47 @@ export default function Location({
             </label>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 bg-white"
             >
               <li>
-                <a onClick={()=>setSortType(0)}>เริ่มต้น</a>
+                <a
+                  className="bg-white text-black hover:bg-[#276968] hover:text-white"
+                  onClick={() => setSortType(0)}
+                >
+                  เริ่มต้น
+                </a>
               </li>
               <li>
-                <a onClick={()=>setSortType(1)}>เรตติ้งมาก - น้อย</a>
+                <a
+                  className="bg-white text-black hover:bg-[#276968] hover:text-white"
+                  onClick={() => setSortType(1)}
+                >
+                  เรตติ้งมาก - น้อย
+                </a>
               </li>
               <li>
-                <a onClick={()=>setSortType(2)}>เรตติ้งน้อย - มาก</a>
+                <a
+                  className="bg-white text-black hover:bg-[#276968] hover:text-white"
+                  onClick={() => setSortType(2)}
+                >
+                  เรตติ้งน้อย - มาก
+                </a>
               </li>
               <li>
-                <a onClick={()=>setSortType(3)}>มีประโยชน์มาก - น้อย</a>
+                <a
+                  className="bg-white text-black hover:bg-[#276968] hover:text-white"
+                  onClick={() => setSortType(3)}
+                >
+                  มีประโยชน์มาก - น้อย
+                </a>
               </li>
               <li>
-                <a onClick={()=>setSortType(4)}>มีประโยชน์น้อย - มาก</a>
+                <a
+                  className="bg-white text-black hover:bg-[#276968] hover:text-white"
+                  onClick={() => setSortType(4)}
+                >
+                  มีประโยชน์น้อย - มาก
+                </a>
               </li>
             </ul>
           </div>
@@ -570,7 +597,7 @@ export default function Location({
       </div>
 
       {commentComponent}
-      {showImage && blog.images !=undefined ?  (
+      {showImage && blog.images != undefined ? (
         <AllImageModal photos={blog.images} setShow={setShowImage} />
       ) : (
         ""

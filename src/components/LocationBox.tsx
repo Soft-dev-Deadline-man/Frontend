@@ -25,13 +25,14 @@ export default function LocationBox({
     <div className="flex flex-wrap bg-[#F8F8F8] rounded-xl overflow-hidden w-full h-[32] relative font-karnit">
       <div className="md:w-[30%] sm:w-[40%] w-[100%] sm:h-72 h-48 relative">
         {blogInfo.firstImage ? (
-          <Image src={blogInfo.firstImage} fill sizes="100vw" alt=""></Image>
+          <div className="w-full h-full" style={{ backgroundImage: `url(${blogInfo.firstImage})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+          </div>
         ) : (
           ""
         )}
       </div>
       <div className="sm:w-[60%] md:w-[70%] w-full sm:p-5 p-3">
-        <h1 className="sm:text-2xl text-lg">{blogInfo.title}</h1>
+        <p className="sm:text-2xl text-lg line-clamp-1">{blogInfo.title}</p>
         <div className=" border-b-2 border-[#D9D9D9] w-full my-2"></div>
         <div className="flex items-center my-2">
           <FontAwesomeIcon icon={faLocationPin} style={{ color: "#37454D" }} />{" "}

@@ -9,9 +9,8 @@ import AuthProvider from "../providers/nextauth-provider";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "Roadtrip in CHON",
-  description: "Discover the best travel website.",
-};
+  title: 'Roadtrip in CHON',
+}
 
 const preahvihear = Preahvihear({
   subsets: ["latin"],

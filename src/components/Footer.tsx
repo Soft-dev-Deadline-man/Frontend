@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { BsFacebook } from "react-icons/Bs";
-import { AiOutlineTwitter } from "react-icons/Ai";
-import { AiFillYoutube } from "react-icons/Ai";
-import { AiFillInstagram } from "react-icons/Ai";
+import { BsFacebook } from "react-icons/bs";
+import { AiOutlineTwitter } from "react-icons/ai";
+import { AiFillYoutube } from "react-icons/ai";
+import { AiFillInstagram } from "react-icons/ai";
 
 export default function Footer() {
   return (

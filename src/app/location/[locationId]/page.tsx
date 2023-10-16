@@ -151,9 +151,7 @@ export default function Location({
   }, [blog]);
 
   const commentComponent = useMemo(() => {
-    if (comment != null) {
-      console.log("oot893423042");
-      console.log(comment);
+    if (comment != null && comment.length > 0) {
       return (
         <div className="w-full max-w-screen-xl px-4">
           {comment.map((val, key) => {
@@ -163,12 +161,16 @@ export default function Location({
         </div>
       );
     } else {
-      return null;
+      return (
+        <div className="flex w-full max-w-screen-xl justify-center items-center h-72">
+          <h1>ไม่มีสถานที่ท่องเที่ยวที่บันทึกไว้....</h1>
+        </div>
+      );
     }
   }, [sortType, []]);
 
   return blog != null && didFetch ? (
-    <div className="w-full min-h-screen flex flex-col items-center font-karni ">
+    <div className="w-full min-h-screen flex flex-col items-center font-karnit">
       {blog.images?.length ? (
         <div
           className="pt-24 w-full grid grid-rows-6 lg:grid-cols-8 grid-cols-6 gap-1 h-[450px] max-w-screen-xl cursor-pointer px-4"

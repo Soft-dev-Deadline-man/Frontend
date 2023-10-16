@@ -138,7 +138,7 @@ export default function Profile({
         </div>
       </div>
       <div className="w-full flex justify-evenly border-y-2 py-4">
-        <div onClick={() => setContent(1)}>
+        <div onClick={() => setContent(1)} className="cursor-pointer">
           <h1
             className={`${
               content === 1 ? "border-b-2 border-[#276968] border-solid" : ""
@@ -148,7 +148,7 @@ export default function Profile({
           </h1>
         </div>
         <div className="border-l-2"></div>
-        <div onClick={() => setContent(2)}>
+        <div onClick={() => setContent(2)} className="cursor-pointer">
           <h1
             className={`${
               content === 2 ? "border-b-2 border-[#276968] border-solid" : ""
@@ -158,7 +158,7 @@ export default function Profile({
           </h1>
         </div>
         <div className="border-r-2"></div>
-        <div onClick={() => setContent(3)}>
+        <div onClick={() => setContent(3)} className="cursor-pointer">
           <h1
             className={`${
               content === 3 ? "border-b-2 border-[#276968] border-solid" : ""
@@ -222,20 +222,22 @@ export default function Profile({
         </div>
       </div>
       <div className={`${content === 2 ? "block" : "hidden"}`}>
-        {review
+        {review && review.length > 0
           ? review.map((element: ICommentInfo, key: any) => {
               return (
                 <CommentBox commentInfo={element} canEdit={isMe} key={key} />
               );
             })
-          : ""}
+          : <div className="flex w-full justify-center items-center h-72">
+              <h1>ไม่มีรีวิวสถานที่ท่องเที่ยว....</h1>
+            </div>}
       </div>
       <div
         className={`${
           content === 3 ? "block" : "hidden"
         } lg:w-full w-[95%] mx-auto flex flex-wrap`}
       >
-        {bookmark
+        {bookmark && bookmark.length > 0
           ? bookmark.map((element: IAllBlog, key: any) => {
               return (
                 <div key={key} className="my-5 lg:w-[50%] w-full lg:p-2">
@@ -245,7 +247,9 @@ export default function Profile({
                 </div>
               );
             })
-          : ""}
+          : <div className="flex w-full justify-center items-center h-72">
+          <h1>ไม่มีสถานที่ท่องเที่ยวที่บันทึกไว้....</h1>
+        </div>}
       </div>
       <main></main>
       {showEditUser && userInfo != null ? (

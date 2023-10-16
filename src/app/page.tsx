@@ -20,7 +20,7 @@ export default function Home() {
   console.log(status);
   const updateBlogs = () => {
     console.log("oot");
-    // dispatch(setBlog(temp));
+    // dispatch(setBlog(temp))
   };
 
   const fetchData = async () => {

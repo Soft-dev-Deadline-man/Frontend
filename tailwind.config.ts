@@ -18,6 +18,7 @@ const config: Config = {
         karla: ["var(--font-roboto-karla)"],
         karnit: ["var(--font-karnit)"],
       },
+      animation: {},
     },
   },
   plugins: [require("daisyui")],

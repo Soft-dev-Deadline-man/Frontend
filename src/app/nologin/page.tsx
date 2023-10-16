@@ -22,8 +22,7 @@ import axios from "axios";
 import ButtonGroup from "@/components/ButtonGroup";
 import Searchbar from "@/components/Searchbar";
 
-
-export default function NoLogin({ blogInfo }: { blogInfo: IBlog | null | any }) {
+function NoLogin() {
   const [firstImage, setFirstImage] = useState<any>(null)
   const { data: session, status } = useSession();
   const { push } = useRouter();
@@ -96,3 +95,4 @@ export default function NoLogin({ blogInfo }: { blogInfo: IBlog | null | any }) 
   );
 }
 
+export default NoLogin

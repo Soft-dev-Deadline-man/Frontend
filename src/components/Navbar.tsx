@@ -170,7 +170,7 @@ export default function Navbar() {
               </div>
             </div>
           ) : (
-            <div onClick={() => signIn()}>
+            <div onClick={() => signIn()} className="cursor-pointer text-[#276968]">
               <h1>Signin</h1>
             </div>
           )}

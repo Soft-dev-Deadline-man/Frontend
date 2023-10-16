@@ -1,15 +1,13 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { signIn} from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 
 const loginSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Invalid email")
-    .required("กรุณาใส่ช่องนี้"),
+  email: Yup.string().email("Invalid email").required("กรุณาใส่ช่องนี้"),
   password: Yup.string(),
 });
 
@@ -19,19 +17,19 @@ export default function Login() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data.get("email"))
+    console.log(data.get("email"));
     await signIn("credentials", {
       redirect: false,
       username: data.get("email"),
       password: data.get("password"),
-    }).then((res)=>{
-      console.log(res)
-      if(res?.error){
-        alert(res.error)
-      }else{
-        router.push("/")
+    }).then((res) => {
+      console.log(res);
+      if (res?.error) {
+        alert(res.error);
+      } else {
+        router.push("/");
       }
-    })
+    });
   }
 
   async function handleGoogleSignin() {
@@ -76,7 +74,7 @@ export default function Login() {
                   <Field
                     name="email"
                     type="email"
-                    className="w-full mb-2 py-4 px-6 border rounded-xl"
+                    className="w-full mb-2 py-4 px-6 border rounded-xl bg-white"
                     id="email"
                     placeholder="Email"
                   />
@@ -94,7 +92,7 @@ export default function Login() {
                   <Field
                     name="password"
                     type="password"
-                    className="w-full py-4 px-6 border rounded-xl focus:outline-none" 
+                    className="w-full py-4 px-6 border rounded-xl focus:outline-none bg-white"
                     id="password"
                     placeholder="Password"
                   />

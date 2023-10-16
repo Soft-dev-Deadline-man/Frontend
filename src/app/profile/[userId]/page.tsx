@@ -33,7 +33,7 @@ export default function Profile({
   params: { userId: string };
 }) {
   const { data: user, status } = useSession();
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
   const userInfo: IUser | null = useAppSelector((state) => state.user.user);
   const [fetchUser, setFetchUser] = useState<IUser | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -44,7 +44,7 @@ export default function Profile({
   const [showEditPassword, setShowEditPassword] = useState<boolean>(false);
   const [review, setReview] = useState<ICommentInfo[] | null>(null);
   const [bookmark, setBookmark] = useState<IAllBlog[] | null>(null);
-  const state = searchParams.get("state")
+  const state = searchParams.get("state");
 
   const getUserById = async (id: string) => {
     const res = await axios.get(
@@ -77,8 +77,8 @@ export default function Profile({
     }
     getBookmarkByUserId(userId);
     getReviewByUserId(userId);
-    if(state != null){
-      setContent(parseInt(state))
+    if (state != null) {
+      setContent(parseInt(state));
     }
   }, [status]);
 
@@ -222,13 +222,19 @@ export default function Profile({
         </div>
       </div>
       <div className={`${content === 2 ? "block" : "hidden"}`}>
-        {review? review.map((element : ICommentInfo,key : any)=>{
-          return(
-            <CommentBox commentInfo={element} canEdit={isMe} key={key}/>
-          )
-        }):""}
+        {review
+          ? review.map((element: ICommentInfo, key: any) => {
+              return (
+                <CommentBox commentInfo={element} canEdit={isMe} key={key} />
+              );
+            })
+          : ""}
       </div>
-      <div className={`${content === 3 ? "block" : "hidden"} lg:w-full w-[95%] mx-auto flex flex-wrap`}>
+      <div
+        className={`${
+          content === 3 ? "block" : "hidden"
+        } lg:w-full w-[95%] mx-auto flex flex-wrap`}
+      >
         {bookmark
           ? bookmark.map((element: IAllBlog, key: any) => {
               return (
@@ -252,7 +258,11 @@ export default function Profile({
       ) : (
         ""
       )}
-      {showEditPassword && userInfo != null ?<EditPasswordModal userInfo={userInfo} setShow={setShowEditPassword}/>:""}
+      {showEditPassword && userInfo != null ? (
+        <EditPasswordModal userInfo={userInfo} setShow={setShowEditPassword} />
+      ) : (
+        ""
+      )}
     </div>
   ) : null;
 }

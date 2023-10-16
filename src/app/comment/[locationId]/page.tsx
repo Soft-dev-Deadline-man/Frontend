@@ -1,12 +1,12 @@
 "use client";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { useRouter,redirect } from "next/navigation";
+import { useRouter, redirect } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import LocationBox from "../../../components/LocationBox";
 import Rating from "../../../components/Rating";
 import { IAllBlog, IBlog } from "../../../types/Blog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -42,10 +42,10 @@ export default function CommentPage({
     recommendActivity: 0,
     spendTime: 0,
   });
-  console.log("oot")
-  
-  if(status === "unauthenticated"){
-    redirect('/signin')
+  console.log("oot");
+
+  if (status === "unauthenticated") {
+    redirect("/signin");
   }
 
   const inputValue =
@@ -68,11 +68,11 @@ export default function CommentPage({
   };
 
   const handleUploadImageClick = () => {
-    if(uploadImages.length<10){
+    if (uploadImages.length < 10) {
       if (addImage.current !== null) {
         addImage.current.click();
       }
-    }else{
+    } else {
       Swal.fire({
         icon: "error",
         title: "อัพโหลดได้ไม่เกิน 10 รูป",
@@ -105,11 +105,11 @@ export default function CommentPage({
       formData.append(`images`, uploadImages[i]);
     }
     formData.append("blogId", locationId);
-    formData.append("title", comment.title)
-    formData.append("description", comment.description)
-    formData.append("recommendActivity" , comment.recommendActivity)
-    formData.append("spendTime",comment.spendTime)
-    formData.append("rating",String(comment.rating))
+    formData.append("title", comment.title);
+    formData.append("description", comment.description);
+    formData.append("recommendActivity", comment.recommendActivity);
+    formData.append("spendTime", comment.spendTime);
+    formData.append("rating", String(comment.rating));
     const res = await axios.post(
       `${process.env.NEXT_PUBLIC_BACKEND}/review`,
       formData,
@@ -122,12 +122,12 @@ export default function CommentPage({
   };
 
   const handleSaveReview = () => {
-    if(comment.rating == 0){
+    if (comment.rating == 0) {
       Swal.fire({
         icon: "error",
         title: "กรุณาใส่เรตติ้ง",
       });
-    }else if (checkContentLength()) {
+    } else if (checkContentLength()) {
       Swal.fire({
         title: "บันทึกรีวิวสถานที่ท่องเที่ยวนี้",
         confirmButtonText: "บันทึก",
@@ -138,10 +138,9 @@ export default function CommentPage({
       }).then((result) => {
         if (result.isConfirmed) {
           saveReview().then((e) => {
-            Swal.fire("Saved!", "", "success").then(res=>{
-              if(res.isConfirmed == true)
-              router.back()
-            })
+            Swal.fire("Saved!", "", "success").then((res) => {
+              if (res.isConfirmed == true) router.back();
+            });
           });
         }
       });
@@ -153,14 +152,16 @@ export default function CommentPage({
     }
   };
 
-  const fetchLocation = async() =>{
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND}/blogs/brief/${locationId}`)
-    setBlog(res.data)
-  }
+  const fetchLocation = async () => {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND}/blogs/brief/${locationId}`
+    );
+    setBlog(res.data);
+  };
 
-  useEffect(()=>{
-    fetchLocation()
-  },[])
+  useEffect(() => {
+    fetchLocation();
+  }, []);
 
   return (
     <div className="pt-24 max-w-screen-xl w-full mx-auto font-karnit">
@@ -219,7 +220,7 @@ export default function CommentPage({
           />
         </div>
         <div className="my-5">
-          <div className="flex justify-between my-2">
+          <div className="flex justify-between my-2 ">
             <h2>กิจกรรมแนะนำ</h2>
             <p
               className={`${
@@ -306,8 +307,12 @@ export default function CommentPage({
           </div>
         </div>
         <div className="flex items-center my-2">
-            <FontAwesomeIcon icon={faTriangleExclamation} style={{ color: "#f0c528" }} size="xl"/>
-            <p className="mx-2">อัพโหลดได้ไม่เกิน 10 รูป</p>
+          <FontAwesomeIcon
+            icon={faTriangleExclamation}
+            style={{ color: "#f0c528" }}
+            size="xl"
+          />
+          <p className="mx-2">อัพโหลดได้ไม่เกิน 10 รูป</p>
         </div>
         <div className="flex justify-evenly my-5">
           <div

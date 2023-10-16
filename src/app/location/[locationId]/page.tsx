@@ -168,7 +168,7 @@ export default function Location({
   }, [sortType, []]);
 
   return blog != null && didFetch ? (
-    <div className="w-full min-h-screen flex flex-col items-center font-karni ">
+    <div className="w-full min-h-screen flex flex-col items-center font-karnit">
       {blog.images?.length ? (
         <div
           className="pt-24 w-full grid grid-rows-6 lg:grid-cols-8 grid-cols-6 gap-1 h-[450px] max-w-screen-xl cursor-pointer px-4"

@@ -22,6 +22,8 @@ const config: Config = {
     },
   },
   plugins: [require("daisyui")],
-  darkMode: "media",
+  daisyui: {
+    themes: false
+  }
 };
 export default config;

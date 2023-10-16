@@ -106,9 +106,9 @@ export default function Carousel() {
 
   return (
     <div>
-      <div className="flex flex-row justify-center gap-x-10 mt-5">
+      <div className="flex flex-row justify-around gap-x-5 mt-5 mx-5">
         <div
-          className={`border-2 border-white rounded-xl w-72  ${
+          className={`md:border-2 border-white rounded-xl md:w-72 hidden md:block ${
             curr - 1 < 0 ? " opacity-0" : "opacity-30"
           }`}
         >
@@ -146,7 +146,7 @@ export default function Carousel() {
           </div>
         </div>
         <div
-          className={`border-2 border-white rounded-xl w-72 ${
+          className={`md:border-2 border-white rounded-xl md:w-72 hidden md:block ${
             curr + 1 > 8 ? "opacity-0" : "opacity-30"
           }`}
         >

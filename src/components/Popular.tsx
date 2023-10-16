@@ -52,7 +52,7 @@ export default function Popular() {
     //     </div>
     //   </div>
     // </Link>
-    <div className=" flex flex-row flex-wrap gap-10 gap-y-24 justify-center bg-[#F3F3F3] rounded-3xl p-8 pt-10 pb-28">
+    <div className=" flex flex-row flex-wrap gap-4 gap-y-24 md:gap-10 md:gap-y-24 justify-center bg-[#F3F3F3] rounded-3xl p-2 md:p-8 pt-10 pb-28 md:pb-28">
       {topBlog
         .filter((item, index) => index < 9)
         .map((bl) => (
@@ -60,14 +60,14 @@ export default function Popular() {
             href={`/location/${bl._id}`}
             className="hover:scale-105 transition ease-in-out"
           >
-            <div className=" w-60 h-64 rounded-3xl shadow-lg relative">
+            <div className=" w-32 h-32 md:w-60 md:h-64 rounded-3xl shadow-lg relative">
               <img src={bl.firstImage} className=" rounded-t-3xl h-full" />
               <div className=" bg-slate-400 absolute w-full bottom-0">
                 <div className=" absolute -top-6 w-full px-5 bg-white rounded-b-3xl">
                   <h1 className=" font-semibold pt-2 truncate">{bl.title}</h1>
                   <div className="flex flex-row justify-between">
-                    <div className=" flex flex-row items-center gap-x-2">
-                      <div className="flex flex-row items-center bg-[#FF6F6B] p-0.5 text-xs gap-x-1 rounded-md text-white px-2">
+                    <div className=" flex md:flex-row flex-col items-start md:items-center gap-x-2">
+                      <div className="flex flex-row items-center bg-[#FF6F6B] p-0.5 text-xs gap-x-0 md:gap-x-1 rounded-md text-white px-2">
                         <h1 className=" font-semibold pr-0.5 text-ellipsis">
                           {bl.rating.toFixed(2)}
                         </h1>
@@ -79,7 +79,7 @@ export default function Popular() {
                     </div>
                   </div>
                   <div>
-                    <p className=" text-xs opacity-30 pb-3 pt-2">
+                    <p className=" text-left md:text-center text-xs opacity-30 pb-3 md:pt-2 truncate">
                       {bl.category}
                     </p>
                   </div>

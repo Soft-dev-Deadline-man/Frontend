@@ -10,20 +10,20 @@ import Link from "next/link";
 
 export default function Search() {
   return (
-    <div className=" justify-center flex mt-8 mb-16 text-xs font-light flex-wrap flex-row items-center gap-10 text-black bg-white p-2 px-4 rounded-md">
+    <div className=" mx-20 flex mt-8 mb-16 text-xs font-light flex-wrap flex-col md:flex-row md:items-center items-start gap-x-10 gap-y-2 text-black bg-white p-2 px-4 rounded-md">
       <Link href="#">
         <FontAwesomeIcon icon={faCreditCard} />
         <span className="ml-2">Categories</span>
       </Link>
-      <span>|</span>
-      <Link href="#">
-        <FontAwesomeIcon icon={faStar} />
-        <span className="ml-2">Popular</span>
-      </Link>
-      <div className="">
+      <span className=" invisible md:visible">|</span>
+        <Link href="#">
+          <FontAwesomeIcon icon={faStar} />
+          <span className="ml-2">Popular</span>
+        </Link>
+      <div className=" invisible md:visible">
         <span>|</span>
       </div>
-      <div className="flex justify-center items-center gap-6">
+      <div className="flex justify-center md:items-center items-start gap-6 flex-col md:flex-row">
         <Link href="#">
           <FontAwesomeIcon icon={faMap} />
           <span className="ml-2">Map</span>

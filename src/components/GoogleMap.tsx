@@ -12,8 +12,8 @@ import { number } from "yup";
 import { WindowInfo } from "./WindowInfo";
 
 const containerStyle = {
-  width: "600px",
-  height: "600px",
+  width: window.innerWidth > 675 ? "600px" : "350px",
+  height: window.innerWidth > 675 ? "600px" : "350px",
 };
 
 const center = {
@@ -22,6 +22,8 @@ const center = {
 };
 
 function GoogleMapComponent() {
+  let width: number;
+  let height: number;
   const [marker, setMarker] = useState<any[]>([]);
   const [selectMarker, setSelectMarker] = useState<string>();
 
@@ -54,36 +56,38 @@ function GoogleMapComponent() {
   }, []);
 
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={9}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-    >
-      {/* Child components, such as markers, info windows, etc. */}
-      {marker.map((e) => (
-        <Marker
-          key={e._id}
-          position={{ lat: Number(e.latidude), lng: Number(e.longtitude) }}
-          onClick={() => {
-            setSelectMarker(e._id);
-          }}
-        >
-          {selectMarker === e._id ? (
-            <InfoWindow>
-              <WindowInfo
-                id={e._id}
-                img={e.firstImage}
-                title={e.title}
-                openTime={e.openTime}
-                typo={e.category}
-              />
-            </InfoWindow>
-          ) : null}
-        </Marker>
-      ))}
-    </GoogleMap>
+    <div className="flex justify-center my-6 lg:my-0">
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={9}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+      >
+        {/* Child components, such as markers, info windows, etc. */}
+        {marker.map((e) => (
+          <Marker
+            key={e._id}
+            position={{ lat: Number(e.latidude), lng: Number(e.longtitude) }}
+            onClick={() => {
+              setSelectMarker(e._id);
+            }}
+          >
+            {selectMarker === e._id ? (
+              <InfoWindow>
+                <WindowInfo
+                  id={e._id}
+                  img={e.firstImage}
+                  title={e.title}
+                  openTime={e.openTime}
+                  typo={e.category}
+                />
+              </InfoWindow>
+            ) : null}
+          </Marker>
+        ))}
+      </GoogleMap>
+    </div>
   ) : (
     <></>
   );

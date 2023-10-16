@@ -13,6 +13,12 @@ import Carousel from "@/components/Carousel";
 import CarouselTest from "@/components/CarouselTest";
 import Link from "next/link";
 import GoogleMapComponent from "@/components/GoogleMap";
+import {
+  AiFillYoutube,
+  AiFillFacebook,
+  AiOutlineTwitter,
+  AiFillInstagram,
+} from "react-icons/ai";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -74,12 +80,12 @@ export default function Home() {
   ];
 
   return (
-    <main>
+    <div className=" border-2 flex justify-center flex-col w-screen">
       {/* Header */}
       <div className="bg-base bg-cover rounded-3xl m-6 bg-no-repeat bg-center h-full">
         <div className=" text-white flex pt-40 justify-center items-center flex-col w-full ">
-          <h1 className=" text-[48px]">Chonburi Thailand</h1>
-          <p className=" text-center text-[18px] pt-6 font-thin text-sm">
+          <h1 className=" text-[48px] text-center">Chonburi Thailand</h1>
+          <p className=" text-center md:text-[18px] text-[9px] mx-10 pt-6 font-thin text-sm">
             เมืองที่มีทั้งความสดใสของทะเลและภูเขา
             <br />
             พบกับทัศนียภาพที่งดงามของชายหาดที่สวยงามอย่างไม่ธรรมดา
@@ -90,20 +96,22 @@ export default function Home() {
         </div>
       </div>
       {/* Preview */}
-      <section className="flex mx-4 items-center gap-x-10 h-[444px]">
+      <section className="flex flex-wrap flex-col md:flex-row mx-4 items-center gap-x-10">
         <div className=" flex-1 px-10">
-          <img src="/sea_1.png"></img>
+          <img src="/sea_1.png" className=" scale-75"></img>
         </div>
 
         <div className="flex-1">
-          <p className="text-xs text-[#276968]">Preview</p>
-          <h1 className="text-3xl">Review your perfect trip</h1>
-          <p className=" m-2 mx-12 text-xs opacity-70">
-            ไม่ว่าคุณจะเลือกที่จะพักผ่อนบนชายหาดหรือสำรวจสถานที่ท่องเที่ยวที่น่าสนใจ
-            ที่ชลบุรีจะทำให้คุณมีความทรงจำที่ยิ่งใหญ่และประทับใจที่สุด
-            มาเยือนในช่วงเวลาใดก็ได้และร่วมสนุกกับความสนุกสุดพิเศษในชลบุรีร่วมกัน
-            !
-          </p>
+          <div className=" text-center md:text-start my-10">
+            <p className="text-xs text-[#276968]">Preview</p>
+            <h1 className="text-3xl">Review your perfect trip</h1>
+            <p className=" m-2 mx-12 text-xs opacity-70">
+              ไม่ว่าคุณจะเลือกที่จะพักผ่อนบนชายหาดหรือสำรวจสถานที่ท่องเที่ยวที่น่าสนใจ
+              ที่ชลบุรีจะทำให้คุณมีความทรงจำที่ยิ่งใหญ่และประทับใจที่สุด
+              มาเยือนในช่วงเวลาใดก็ได้และร่วมสนุกกับความสนุกสุดพิเศษในชลบุรีร่วมกัน
+              !
+            </p>
+          </div>
           <div className="flex">
             <div className="flex-1">
               <div>
@@ -131,8 +139,10 @@ export default function Home() {
 
       {/* Cetagories */}
       <section className=" mx-4">
-        <h1 className=" text-4xl mb-4">Cetagories</h1>
-        <div className=" flex flex-row gap-y-5 flex-wrap  justify-center">
+        <h1 className=" text-4xl mb-4 text-center my-10 md:text-start md:my-0">
+          Cetagories
+        </h1>
+        <div className=" flex flex-row gap-y-5 gap-x-4 flex-wrap  justify-center">
           {cetagories.map((e) => (
             <Cetagories name={e.name} pic={e.pic} place={e.place} />
           ))}
@@ -140,22 +150,24 @@ export default function Home() {
       </section>
 
       {/* Popular */}
-      <section className=" my-10 mx-4">
+      <section className=" my-10 mx-4 text-center md:text-start">
         <p className="text-[#276968]">Top destination</p>
         <h1 className=" text-4xl mb-4">Popular</h1>
         <Popular />
       </section>
 
       {/* Map */}
-      <section className=" md:flex gap-y-10 justify-around  items-center  my-4">
-        <div className=" sm:text-center flex flex-col">
-          <h1 className=" sm:text-center md:text-start text-4xl font-bold">Find Your</h1>
-          <h2 className="sm:text-center md:text-start ">Road Trip in CHON</h2>
-          <p className="sm:text-center md:text-start text-sm text-[#276968]">
+      <section className=" lg:flex gap-y-10 justify-around  items-center  my-4">
+        <div className=" text-center flex flex-col text-center md:text-start mb-4 md:mb-0">
+          <h1 className=" text-center lg:text-start text-4xl font-bold">
+            Find Your
+          </h1>
+          <h2 className="sm:text-center lg:text-start ">Road Trip in CHON</h2>
+          <p className="sm:text-center lg:text-start text-sm text-[#276968]">
             Everything you need to organize your trip
           </p>
         </div>
-        <div className=" sm:flex justify-center">
+        <div className=" sm:flex justify-center items-center">
           <GoogleMapComponent />
         </div>
       </section>
@@ -185,14 +197,25 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="text-white pd-4 bg-[#276968] w-screen flex flex-row justify-between flex-wrap p-4">
+      <footer className="text-white pd-4 bg-[#276968] w-screen flex md:flex-row flex-col gap-y-4 md:gap-0 justify-between flex-wrap p-4">
         <div>
-          <img src="./Header.png" />
-          <div className="flex flex-row justify-between">
-            <div>Y</div>
-            <div>X</div>
-            <div>F</div>
-            <div>I</div>
+          <div className=" flex justify-center">
+            <img className="" src="./Header.png" />
+          </div>
+          <div className="flex flex-row justify-between mt-2">
+            <div className=" text-2xl">
+              <AiFillFacebook />
+            </div>
+            <div className=" text-3xl">
+              <AiOutlineTwitter />
+            </div>
+            <div className=" text-3xl">
+              <AiFillYoutube />
+            </div>
+
+            <div className=" text-2xl">
+              <AiFillInstagram />
+            </div>
           </div>
         </div>
         <div className=" flex flex-col">
@@ -250,6 +273,6 @@ export default function Home() {
           </Link>
         </div>
       </footer>
-    </main>
+    </div>
   );
 }

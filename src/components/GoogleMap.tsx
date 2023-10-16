@@ -17,8 +17,8 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 13.1977657,
-  lng: 101.2377832,
+  lat: 12.940666,
+  lng: 100.889231,
 };
 
 function GoogleMapComponent() {
@@ -29,7 +29,7 @@ function GoogleMapComponent() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND}blogs/all-data`)
+      .get(`${process.env.NEXT_PUBLIC_BACKEND}/blogs/all-data`)
       .then((response) => {
         setMarker(response.data);
       })
@@ -63,6 +63,10 @@ function GoogleMapComponent() {
         zoom={9}
         onLoad={onLoad}
         onUnmount={onUnmount}
+        options={{
+          maxZoom : 15,
+          disableDefaultUI: true
+        }}
       >
         {/* Child components, such as markers, info windows, etc. */}
         {marker.map((e) => (

@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${preahvihear.variable} ${karla.variable}`}>
+    <html lang="en" className={`${preahvihear.variable} ${karla.variable} scroll-smooth`}>
       <body>
         <ReduxProvider>
           <AuthProvider>{children}</AuthProvider>

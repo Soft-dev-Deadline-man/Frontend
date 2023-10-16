@@ -548,7 +548,7 @@ export default function Location({
             </label>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 bg-white"
+              className="dropdown-content z-[1] menu p-2 shadow rounded-box w-52 bg-white"
             >
               <li>
                 <a

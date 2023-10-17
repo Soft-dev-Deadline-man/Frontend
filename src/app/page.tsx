@@ -157,7 +157,7 @@ export default function Home() {
           <Carousel />
         </div>
       </section>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

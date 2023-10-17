@@ -7,6 +7,7 @@ import { Preahvihear,Karla,Kanit } from 'next/font/google'
 import ReduxProvider from "../providers/redux-provider"
 import AuthProvider from '../providers/nextauth-provider'
 import Navbar from '../components/Navbar'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Roadtrip in CHON',
@@ -45,6 +46,7 @@ export default function RootLayout({
         <AuthProvider>
           <Navbar/>
           {children}
+          <Footer/>
         </AuthProvider>
       </ReduxProvider>
       </body>

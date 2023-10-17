@@ -28,7 +28,7 @@ import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import CommentBox from "../../../components/CommentBox";
 import { ICommentInfo } from "@/types/Comment";
 
-export default function Location({
+export default function LocationId({
   params: { locationId },
 }: {
   params: { locationId: string };

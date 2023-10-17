@@ -12,9 +12,11 @@ import { number } from "yup";
 import { WindowInfo } from "./WindowInfo";
 
 const containerStyle = {
-  width: window.innerWidth > 675 ? "600px" : "350px",
-  height: window.innerWidth > 675 ? "600px" : "350px",
+  width: "100%",
+  height: "100%",
+  borderRadius: "16px",
 };
+
 
 const center = {
   lat: 12.940666,
@@ -56,7 +58,7 @@ function GoogleMapComponent() {
   }, []);
 
   return isLoaded ? (
-    <div className="flex justify-center my-6 lg:my-0">
+    <div className="flex justify-center my-6 lg:my-0 sm:w-[600px] sm:h-[600px] w-[350px] h-[350px]">
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}

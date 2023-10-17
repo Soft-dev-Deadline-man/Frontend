@@ -13,18 +13,18 @@ export const metadata: Metadata = {
 }
 
 const preahvihear = Preahvihear({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-preahvihear',
-  weight : "400"
-})
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-preahvihear",
+  weight: "400",
+});
 
 const karla = Karla({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-karla',
-  weight : "400"
-})
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-karla",
+  weight: "400",
+});
 
 const karnit = Kanit({
   subsets: ['latin'],
@@ -36,10 +36,10 @@ const karnit = Kanit({
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${preahvihear.variable} ${karla.variable} ${karnit.variable}`}>
+    <html lang="en" className={`${preahvihear.variable} ${karla.variable} ${karnit.variable} scroll-smooth`}>
       <body>
       <ReduxProvider>
         <AuthProvider>
@@ -49,5 +49,5 @@ export default function RootLayout({
       </ReduxProvider>
       </body>
     </html>
-  )
+  );
 }

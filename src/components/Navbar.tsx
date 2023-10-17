@@ -23,14 +23,14 @@ const navMenu = [
     title: "Location",
     linkTo: "/location",
   },
-  {
-    title: "About us",
-    linkTo: "#aboutus",
-  },
-  {
-    title: "Contact",
-    linkTo: "#contact",
-  },
+  // {
+  //   title: "About us",
+  //   linkTo: "#aboutus",
+  // },
+  // {
+  //   title: "Contact",
+  //   linkTo: "#contact",
+  // },
 ];
 
 type jwtType = {

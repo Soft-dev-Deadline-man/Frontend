@@ -178,7 +178,7 @@ export default function Profile({
             <p className="text-gray-500 mb-1 text-sm">Email</p>
             <p className="text-lg mb-4">{fetchUser.email}</p>
           </div>
-          <div className={`${isMe ? "block" : "hidden"} mb-4`}>
+          <div className={`${isMe && fetchUser.accountType === "normal" ? "block" : "hidden"} mb-4`}>
             <p className="text-gray-500 mb-1 text-sm">Password</p>
             <div
               className="p-2 bg-inherit border-[#276968] rounded-xl flex border-2 cursor-pointer w-fit"
@@ -221,7 +221,7 @@ export default function Profile({
           )}
         </div>
       </div>
-      <div className={`${content === 2 ? "block" : "hidden"}`}>
+      <div className={`${content === 2 ? "block" : "hidden"} p-4`}>
         {review && review.length > 0
           ? review.map((element: ICommentInfo, key: any) => {
               return (
@@ -240,7 +240,7 @@ export default function Profile({
         {bookmark && bookmark.length > 0
           ? bookmark.map((element: IAllBlog, key: any) => {
               return (
-                <div key={key} className="my-5 lg:w-[50%] w-full lg:p-2">
+                <div key={key} className="my-5 lg:w-[50%] w-full lg:p-4">
                   <Link href={`/location/${element._id}`}>
                     <LocationBox blogInfo={element} />
                   </Link>

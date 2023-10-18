@@ -10,4 +10,5 @@ export interface IUser{
     updatedAt: string;
     bio:string;
     __v: number;
+    accountType:string
 }

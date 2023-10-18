@@ -119,7 +119,7 @@ export default function CommentBox({
     } else {
       return null;
     }
-  }, []);
+  }, [commentInfo]);
 
   return (
     <>

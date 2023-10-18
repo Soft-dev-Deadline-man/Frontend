@@ -128,7 +128,7 @@ export default function Home() {
             Everything you need to organize your trip
           </p>
         </div>
-        <div className=" sm:flex justify-center items-center" id="MAP">
+        <div className="flex justify-center items-center" id="MAP">
           <GoogleMapComponent />
         </div>
       </section>

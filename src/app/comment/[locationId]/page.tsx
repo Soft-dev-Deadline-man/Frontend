@@ -88,10 +88,10 @@ export default function CommentPage({
 
   const checkContentLength = () => {
     if (
-      count.description > 700 ||
-      count.recommendActivity > 40 ||
-      count.spendTime > 40 ||
-      count.title > 80
+      count.description > 700 || count.description == 0 || 
+      count.recommendActivity > 40 || count.recommendActivity == 0 ||
+      count.spendTime > 40 ||  count.spendTime ==0 ||
+        count.title > 80 || count.title ==0
     ) {
       return false;
     } else {
@@ -147,7 +147,7 @@ export default function CommentPage({
     } else {
       Swal.fire({
         icon: "error",
-        title: "ตัวอักษรเกินกว่าที่กำหนด",
+        title: "ตัวอักษรเกินกว่าที่กำหนด หรือไม่มีตัวอักษร",
       });
     }
   };

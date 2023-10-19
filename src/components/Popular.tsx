@@ -23,7 +23,7 @@ export default function Popular() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND}/blogs/all-data`)
+      .get(`${process.env.NEXT_PUBLIC_BACKEND}/blogs/top-location`)
       .then((response) => {
         setTopBlog(response.data);
       })
